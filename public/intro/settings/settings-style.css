@@ -1,0 +1,400 @@
+:root {
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
+  --error-color: #ff3939;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.header-logo a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo a img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+header nav {
+  margin-left: 1130px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li {
+  margin-right: 50px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+main.login-container {
+  max-width: 600px;
+  margin: 150px auto;
+  padding: 30px;
+  background-color: var(--form-background);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+main.login-container h2 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 1px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  display: block;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-color);
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.shake-error {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border-color: var(--error-color) !important;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.login-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin: 25px auto;
+  width: 250px;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: var(--button-hover);
+}
+
+.signup-link {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 25px;
+  color: var(--text-color);
+}
+
+.signup-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.signup-link a:hover,
+.forgot-password a:hover {
+  color: var(--button-hover);
+  text-decoration: none;
+}
+
+.forgot-password {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 15px;
+  color: var(--text-color);
+}
+
+.forgot-password a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 1px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+footer p {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: var(--text-color);
+}
+
+header {
+    justify-content: flex-start;
+}
+
+header h1 {
+    margin-left: 20px;
+    font-size: 28px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+main.login-container {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 30px;
+}
+
+.profile-pic-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+.settings-section h2 {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--input-border);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.account-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.account-field label {
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.email-and-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#userEmail {
+    background-color: var(--input-border);
+    padding: 12px;
+    border-radius: 6px;
+    color: var(--text-color);
+    flex-grow: 1;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+#resetPasswordBtn {
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.danger-zone {
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid var(--input-border);
+    padding-top: 20px;
+}
+
+.danger-zone label {
+    color: var(--error-color);
+    margin-bottom: 10px;
+}
+
+.confirmation-text {
+    font-style: italic;
+    color: var(--text-color);
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+#deleteAccountConfirmation {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--error-color);
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--text-color);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+#deleteAccountBtn {
+    width: 100%;
+    background-color: var(--error-color);
+    color: var(--text-color);
+    padding: 10px;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+#deleteAccountBtn:hover {
+    background-color: #d62c2c;
+}
+
+.disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 575px) {
+    main.login-container {
+        padding: 15px;
+        margin: 100px auto 20px auto;
+    }
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+    .settings-section h2 {
+        font-size: 1.3rem;
+    }
+    .account-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .account-field label {
+        margin-bottom: 5px;
+    }
+    .email-and-button {
+        flex-direction: column;
+        width: 100%;
+    }
+    #userEmail {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    #resetPasswordBtn {
+        width: 100%;
+        margin: 0;
+    }
+    .danger-zone {
+        align-items: center;
+        text-align: center;
+    }
+    .danger-zone label {
+        text-align: center;
+        width: 100%;
+    }
+    .confirmation-text {
+        text-align: center;
+    }
+}
