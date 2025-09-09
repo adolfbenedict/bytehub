@@ -11,7 +11,6 @@ const crypto = require('crypto');
 require('dotenv').config();
 
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
@@ -28,10 +27,10 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 const EMAIL_USERNAME = process.env.EMAIL_USERNAME;
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
-const FRONTEND_URL = 'https://bytehub-one.vercel.app'; // Your Vercel frontend URL
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
-if (!EMAIL_PASSWORD || !EMAIL_USERNAME) {
-    console.error('Missing EMAIL_USERNAME or EMAIL_PASSWORD environment variables.');
+if (!EMAIL_PASSWORD || !EMAIL_USERNAME || !FRONTEND_URL || !MONGODB_URI || !JWT_SECRET) {
+    console.error('Missing one or more required environment variables.');
     process.exit(1);
 }
 
@@ -54,8 +53,8 @@ const userInfoSchema = new mongoose.Schema({
     isVerified: { type: Boolean, default: false },
     verificationToken: String,
     verificationTokenExpires: Date,
-    resetPasswordToken: String, // New field for password reset
-    resetPasswordExpires: Date, // New field for password reset
+    resetPasswordToken: String, 
+    resetPasswordExpires: Date, 
 });
 
 const UserInfo = mongoose.model('userINFO', userInfoSchema);
@@ -244,7 +243,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// NEW: Forgot password endpoint
 app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
 
@@ -257,7 +255,7 @@ app.post('/forgot-password', async (req, res) => {
 
         const resetPasswordToken = crypto.randomBytes(20).toString('hex');
         user.resetPasswordToken = resetPasswordToken;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.resetPasswordExpires = Date.now() + 3600000;
         await user.save();
 
         await sendPasswordResetEmail(user.email, resetPasswordToken);
@@ -269,7 +267,6 @@ app.post('/forgot-password', async (req, res) => {
     }
 });
 
-// NEW: Reset password endpoint
 app.post('/reset-password', async (req, res) => {
     const { token, newPassword } = req.body;
 
@@ -295,7 +292,6 @@ app.post('/reset-password', async (req, res) => {
         res.status(500).json({ error: 'Error resetting password.' });
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
