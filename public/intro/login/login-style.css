@@ -24,6 +24,8 @@ body {
   padding-bottom: 60px; /* Space for fixed footer */
   box-sizing: border-box;
   overflow-x: hidden; /* Prevent horizontal scroll */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 header {

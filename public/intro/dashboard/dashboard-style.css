@@ -1,710 +1,714 @@
 /* Universal box-sizing for consistent layout */
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 :root {
-    --primary-color: #00d3ff;
-    --text-color: #ffffff;
-    --font-family: 'Arial', sans-serif;
-    --font-size: 16px;
-    --line-height: 1.5;
-    --background-color: #080e14;
-    --form-background: #101820;
-    --input-border: #222f3d;
-    --input-focus: #009fcc;
-    --button-hover: #009fcc;
-    --footer-background: #080e14;
-    --footer-text-color: #ffffff;
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    --error-color: #ff3939;
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --error-color: #ff3939;
 }
 
 body {
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    user-select: none;
-    overflow-x: hidden;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  user-select: none;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 body.no-scroll {
-    overflow: hidden;
-    height: 100vh;
+  overflow: hidden;
+  height: 100vh;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--background-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Keeps logo and icons separated */
-    padding: 1px 20px;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Keeps logo and icons separated */
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  height: 60px;
 }
 
 header a.logo {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 800;
-    order: 0; /* Ensures logo is first */
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  order: 0; /* Ensures logo is first */
+  display: flex;
+  align-items: center;
 }
 
 header a.logo img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    transition: transform 0.3s;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  transition: transform 0.3s;
 }
 
 /* Container for navigation icons (excluding logout) */
 .header-nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Spacing between icons */
-    order: 1; /* Position after the logo */
-    flex-grow: 1; /* Allows it to take available space */
-    justify-content: flex-start; /* Aligns icons to the left within its space */
-    margin-left: 20px; /* Space from the logo */
-    padding-right: 10px; /* Consistent padding before the logout icon */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between icons */
+  order: 1; /* Position after the logo */
+  flex-grow: 1; /* Allows it to take available space */
+  justify-content: flex-start; /* Aligns icons to the left within its space */
+  margin-left: 20px; /* Space from the logo */
+  padding-right: 10px; /* Consistent padding before the logout icon */
 }
 
 /* Base style for individual icon links in header */
 .header-nav-icons a,
 .header-logout-icon {
-    color: var(--primary-color);
-    background-color: var(--form-background);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.4rem;
-    transition: color 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--primary-color);
+  background-color: var(--form-background);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .header-nav-icons a:hover,
 .header-logout-icon:hover {
-    color: var(--text-color);
-    transform: translateY(-2px);
-    background-color: var(--button-hover);
+  color: var(--text-color);
+  transform: translateY(-2px);
+  background-color: var(--button-hover);
 }
 
 .header-nav-icons .material-icons,
 .header-logout-icon .material-icons {
-    font-size: inherit;
+  font-size: inherit;
 }
 
 /* Specific styling for the logout icon on smaller devices */
 .header-logout-icon {
-    order: 2; /* Position after the main nav icons */
-    margin-left: auto; /* Pushes it to the far right */
-    display: none; /* Hidden by default, shown in media queries */
+  order: 2; /* Position after the main nav icons */
+  margin-left: auto; /* Pushes it to the far right */
+  display: none; /* Hidden by default, shown in media queries */
 }
 
 /* Remove hamburger related styles */
 .hamburger {
-    display: none !important;
+  display: none !important;
 }
 
 /* Sidebar default state for smaller screens (hidden) */
 .sidebar {
-    position: fixed;
-    left: 0;
-    top: 60px;
-    width: 200px;
-    height: calc(100vh - 60px);
-    background-color: var(--background-color);
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    overflow-y: auto;
-    border-right: 0.5px solid var(--primary-color);
-    z-index: 999;
-    transform: translateX(-100%);
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 200px;
+  height: calc(100vh - 60px);
+  background-color: var(--background-color);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  border-right: 0.5px solid var(--primary-color);
+  z-index: 999;
+  transform: translateX(-100%);
 }
 
 .sidebar-header {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: none;
-    border-bottom: none;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none;
+  border-bottom: none;
 }
 
 .sidebar-header h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    color: var(--text-color);
-    font-weight: 600;
-    transition: opacity 0.3s ease;
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: opacity 0.3s ease;
 }
 
 .sidebar-menu {
-    list-style: none;
-    padding: 20px 0;
-    margin: 0;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-around;
-    gap: 10px;
+  list-style: none;
+  padding: 20px 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  gap: 10px;
 }
 
 .sidebar-menu li {
-    padding: 15px 20px;
-    margin-top: 0;
-    background-color: var(--form-background);
-    border-radius: 8px;
-    text-align: center;
-    transition: background-color 0.5s ease, transform 0.2s ease;
-    flex-basis: auto;
-    max-width: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px 20px;
+  margin-top: 0;
+  background-color: var(--form-background);
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.5s ease, transform 0.2s ease;
+  flex-basis: auto;
+  max-width: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-menu li:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 .sidebar-menu li a {
-    font-size: 0.9rem;
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    white-space: normal;
-    overflow: hidden;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  white-space: normal;
+  overflow: hidden;
 }
 
 .sidebar-menu li a span.material-icons {
-    font-size: 2rem;
-    margin: 0;
-    color: var(--primary-color);
+  font-size: 2rem;
+  margin: 0;
+  color: var(--primary-color);
 }
 
 .sidebar-menu li a span:last-child {
-    margin-left: 0;
-    transition: opacity 0.3s ease;
+  margin-left: 0;
+  transition: opacity 0.3s ease;
 }
 
 .sidebar-menu .sidebar-logout-item {
-    display: none !important;
+  display: none !important;
 }
 
 section {
-    padding-top: calc(60px + 20px);
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+  padding-top: calc(60px + 20px);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
 
 section h2 {
-    font-size: 1.8rem;
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--primary-color);
-    font-weight: bold;
-    transition: opacity 0.3s ease;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: opacity 0.3s ease;
 }
 
 .main-content {
-    transition: margin-left 0.3s ease-in-out;
-    margin-left: 0;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0;
 }
 
 .courses-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 50px;
-    justify-content: center;
-    max-width: 2500px;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 50px;
+  justify-content: center;
+  max-width: 2500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .course-card {
-    background-color: var(--background-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 15px;
-    width: calc(20% - 16px);
+  background-color: var(--background-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
+  width: calc(20% - 16px);
 }
 
 .course-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .course-card h4,
 .course-card p {
-    font-size: 1rem;
-    color: var(--primary-color);
-    padding: 10px;
-    margin: 0;
-    text-align: center;
+  font-size: 1rem;
+  color: var(--primary-color);
+  padding: 10px;
+  margin: 0;
+  text-align: center;
 }
 
 .course-card p {
-    color: var(--text-color);
-    flex-grow: 1;
+  color: var(--text-color);
+  flex-grow: 1;
 }
 
 .enroll-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    padding: 10px 50px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 20px auto 0 auto;
-    text-align: center;
-    margin-top: auto;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 50px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  margin-top: auto;
 }
 
 .enroll-button:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 .form-container {
-    background-color: var(--form-background);
-    padding: 50px;
-    border-radius: 12px;
-    box-shadow: var(--box-shadow);
-    margin: 50px auto;
-    max-width: 600px;
+  background-color: var(--form-background);
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  margin: 50px auto;
+  max-width: 600px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: var(--text-color);
-    font-size: 0.9em;
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color);
+  font-size: 0.9em;
 }
 
 .form-group input[type="email"],
 .form-group textarea {
-    color: var(--text-color);
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-    transition: border-color 0.3s ease;
-    background-color: transparent;
+  color: var(--text-color);
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+  background-color: transparent;
 }
 
 .form-group input[type="email"]:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
+  outline: none;
+  border-color: var(--primary-color);
 }
 
 .form-group textarea {
-    color: var(--text-color);
-    resize: none;
-    height: 200px;
+  color: var(--text-color);
+  resize: none;
+  height: 200px;
 }
 
 .help-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    margin: 25px auto;
-    width: 250px;
-    display: block;
-    transition: background-color 0.3s;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin: 25px auto;
+  width: 250px;
+  display: block;
+  transition: background-color 0.3s;
 }
 
 .help-button:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 footer {
-    background-color: var(--footer-background);
-    color: var(--footer-text-color);
-    text-align: center;
-    padding: 1px;
-    position: static;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
+  background-color: var(--footer-background);
+  color: var(--footer-text-color);
+  text-align: center;
+  padding: 1px;
+  position: static;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 footer p {
-    margin-top: 10px;
-    font-size: 0.7rem;
-    margin-left: 0;
+  margin-top: 10px;
+  font-size: 0.7rem;
+  margin-left: 0;
 }
 
 #profile .profile {
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-    flex-direction: column;
-    align-items: center;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  flex-direction: column;
+  align-items: center;
 }
 
 #profile .profile .ceo-image {
-    width: 500px;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid var(--primary-color);
-    margin-top: 80px;
-    margin-left: 0;
-    transition: box-shadow 0.3s ease-in-out;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--primary-color);
+  margin-top: 80px;
+  margin-left: 0;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 #profile .profile .ceo-image:hover {
-    box-shadow: 0 0 20px 10px var(--primary-color);
+  box-shadow: 0 0 20px 10px var(--primary-color);
 }
 
 .greeting {
-    font-size: 1.5rem;
-    text-align: center;
-    margin-top: 60px;
-    margin-left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-    transition: opacity 0.3s ease;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 60px;
+  margin-left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: opacity 0.3s ease;
 }
 
 /* --- Media Queries for Responsiveness --- */
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    header {
-        justify-content: flex-start; /* Logo to left, icons hidden */
-    }
-    .header-nav-icons {
-        display: none; /* Hide header icons on large screens */
-    }
-    .header-logout-icon {
-        display: none; /* Hide the individual logout icon on large screens */
-    }
+  header {
+    justify-content: flex-start; /* Logo to left, icons hidden */
+  }
+  .header-nav-icons {
+    display: none; /* Hide header icons on large screens */
+  }
+  .header-logout-icon {
+    display: none; /* Hide the individual logout icon on large screens */
+  }
 
-    .main-content {
-        margin-left: 200px;
-        padding-top: calc(60px + 20px);
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    footer p {
-        margin-left: 200px;
-    }
+  .main-content {
+    margin-left: 200px;
+    padding-top: calc(60px + 20px);
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  footer p {
+    margin-left: 200px;
+  }
 
-    .sidebar {
-        transform: translateX(0);
-        width: 200px;
-        z-index: 999;
-        display: block;
-    }
+  .sidebar {
+    transform: translateX(0);
+    width: 200px;
+    z-index: 999;
+    display: block;
+  }
 
-    .sidebar-menu li {
-        background-color: transparent;
-        border-radius: 0;
-        padding: 55px 20px;
-        box-shadow: none;
-        text-align: left;
-    }
-    .sidebar-menu li a {
-        font-size: 0.8rem;
-        flex-direction: row;
-        gap: 12px;
-        white-space: nowrap;
-    }
-    .sidebar-menu li a span.material-icons {
-        font-size: 1.5rem;
-        color: var(--text-color);
-    }
+  .sidebar-menu li {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 55px 20px;
+    box-shadow: none;
+    text-align: left;
+  }
+  .sidebar-menu li a {
+    font-size: 0.8rem;
+    flex-direction: row;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .sidebar-menu li a span.material-icons {
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
 
-    #profile .profile .ceo-image {
-        margin-left: calc(50% - 520px);
-    }
-    .greeting {
-        margin-left: calc(50% - 515px);
-    }
+  #profile .profile .ceo-image {
+    margin-left: calc(50% - 520px);
+  }
+  .greeting {
+    margin-left: calc(50% - 515px);
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) {
-    header {
-        justify-content: flex-start;
-    }
-    .header-nav-icons {
-        display: none;
-    }
-    .header-logout-icon {
-        display: none;
-    }
+  header {
+    justify-content: flex-start;
+  }
+  .header-nav-icons {
+    display: none;
+  }
+  .header-logout-icon {
+    display: none;
+  }
 
-    .main-content {
-        margin-left: 200px;
-        padding-top: calc(60px + 20px);
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    footer p {
-        margin-left: 200px;
-    }
+  .main-content {
+    margin-left: 200px;
+    padding-top: calc(60px + 20px);
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  footer p {
+    margin-left: 200px;
+  }
 
-    .sidebar {
-        transform: translateX(0);
-        width: 200px;
-        z-index: 999;
-        display: block;
-    }
+  .sidebar {
+    transform: translateX(0);
+    width: 200px;
+    z-index: 999;
+    display: block;
+  }
 
-    .sidebar-menu li {
-        background-color: transparent;
-        border-radius: 0;
-        padding: 55px 20px;
-        box-shadow: none;
-        text-align: left;
-    }
-    .sidebar-menu li a {
-        font-size: 0.8rem;
-        flex-direction: row;
-        gap: 12px;
-        white-space: nowrap;
-    }
-    .sidebar-menu li a span.material-icons {
-        font-size: 1.5rem;
-        color: var(--text-color);
-    }
+  .sidebar-menu li {
+    background-color: transparent;
+    border-radius: 0;
+    padding: 55px 20px;
+    box-shadow: none;
+    text-align: left;
+  }
+  .sidebar-menu li a {
+    font-size: 0.8rem;
+    flex-direction: row;
+    gap: 12px;
+    white-space: nowrap;
+  }
+  .sidebar-menu li a span.material-icons {
+    font-size: 1.5rem;
+    color: var(--text-color);
+  }
 
-    #profile .profile .ceo-image {
-        margin-left: calc(50% - 520px);
-    }
-    .greeting {
-        margin-left: calc(50% - 515px);
-    }
+  #profile .profile .ceo-image {
+    margin-left: calc(50% - 520px);
+  }
+  .greeting {
+    margin-left: calc(50% - 515px);
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
-    header {
-        justify-content: space-between; /* Logo left, nav icons in middle, logout right */
-    }
-    .header-nav-icons {
-        display: flex;
-        gap: 15px; /* Slightly larger gap for tablets */
-        justify-content: center; /* Center these icons within their flex-grow space */
-        flex-grow: 1; /* Allows it to grow to center itself */
-        margin-left: 0; /* No margin-left to push it away from logo */
-        /* padding-right removed, as margin-left: auto on logout handles spacing */
-    }
-    .header-nav-icons a {
-        width: 45px;
-        height: 45px;
-        font-size: 1.6rem;
-    }
-    .header-logout-icon {
-        display: flex; /* Show logout icon */
-        margin-left: 20px; /* Space between the main nav icons and logout */
-        order: 2; /* Position after the header-nav-icons */
-    }
-    .sidebar {
-        display: none;
-    }
+  header {
+    justify-content: space-between; /* Logo left, nav icons in middle, logout right */
+  }
+  .header-nav-icons {
+    display: flex;
+    gap: 15px; /* Slightly larger gap for tablets */
+    justify-content: center; /* Center these icons within their flex-grow space */
+    flex-grow: 1; /* Allows it to grow to center itself */
+    margin-left: 0; /* No margin-left to push it away from logo */
+    /* padding-right removed, as margin-left: auto on logout handles spacing */
+  }
+  .header-nav-icons a {
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
+  }
+  .header-logout-icon {
+    display: flex; /* Show logout icon */
+    margin-left: 20px; /* Space between the main nav icons and logout */
+    order: 2; /* Position after the header-nav-icons */
+  }
+  .sidebar {
+    display: none;
+  }
 
-    .main-content {
-        margin-left: 0;
-        padding-top: calc(60px + 20px);
-    }
-    footer p {
-        margin-left: 0;
-    }
+  .main-content {
+    margin-left: 0;
+    padding-top: calc(60px + 20px);
+  }
+  footer p {
+    margin-left: 0;
+  }
 
-    #profile .profile .ceo-image {
-        width: 300px;
-        height: 300px;
-        margin-left: 0;
-    }
-    .greeting {
-        margin-left: 0;
-    }
-    .courses-container {
-        justify-content: space-around;
-        gap: 20px;
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .course-card {
-        width: calc(33.33% - 20px);
-    }
+  #profile .profile .ceo-image {
+    width: 300px;
+    height: 300px;
+    margin-left: 0;
+  }
+  .greeting {
+    margin-left: 0;
+  }
+  .courses-container {
+    justify-content: space-around;
+    gap: 20px;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .course-card {
+    width: calc(33.33% - 20px);
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) {
-    header {
-        justify-content: space-between;
-    }
-    .header-nav-icons {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        flex-grow: 1;
-        margin-left: 0;
-        /* padding-right removed */
-    }
-    .header-nav-icons a {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-    }
-    .header-logout-icon {
-        display: flex;
-        margin-left: 15px; /* Space between the main nav icons and logout */
-        order: 2;
-    }
-    .sidebar {
-        display: none;
-    }
+  header {
+    justify-content: space-between;
+  }
+  .header-nav-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 0;
+    /* padding-right removed */
+  }
+  .header-nav-icons a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+  .header-logout-icon {
+    display: flex;
+    margin-left: 15px; /* Space between the main nav icons and logout */
+    order: 2;
+  }
+  .sidebar {
+    display: none;
+  }
 
-    .main-content {
-        margin-left: 0;
-        padding-top: calc(60px + 20px);
-    }
-    footer p {
-        margin-left: 0;
-    }
+  .main-content {
+    margin-left: 0;
+    padding-top: calc(60px + 20px);
+  }
+  footer p {
+    margin-left: 0;
+  }
 
-    #profile .profile .ceo-image {
-        width: 250px;
-        height: 250px;
-        margin-top: 80px;
-        margin-left: 0;
-    }
-    .greeting {
-        margin-left: 0;
-    }
-    .courses-container {
-        justify-content: space-around;
-        gap: 20px;
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .course-card {
-        width: calc(50% - 20px);
-    }
-    .enroll-button {
-        width: 160px;
-    }
+  #profile .profile .ceo-image {
+    width: 250px;
+    height: 250px;
+    margin-top: 80px;
+    margin-left: 0;
+  }
+  .greeting {
+    margin-left: 0;
+  }
+  .courses-container {
+    justify-content: space-around;
+    gap: 20px;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .course-card {
+    width: calc(50% - 20px);
+  }
+  .enroll-button {
+    width: 160px;
+  }
 }
 
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575px) {
-    header {
-        padding: 10px 10px;
-        justify-content: space-between;
-    }
-    .header-nav-icons {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        flex-grow: 1;
-        margin-left: 0;
-        /* padding-right removed */
-    }
-    .header-nav-icons a {
-        width: 38px;
-        height: 38px;
-        font-size: 1.3rem;
-    }
-    .header-logout-icon {
-        display: flex;
-        margin-left: 10px; /* Space between the main nav icons and logout */
-        order: 2;
-    }
-    .sidebar {
-        display: none;
-    }
+  header {
+    padding: 10px 10px;
+    justify-content: space-between;
+  }
+  .header-nav-icons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 0;
+    /* padding-right removed */
+  }
+  .header-nav-icons a {
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+  }
+  .header-logout-icon {
+    display: flex;
+    margin-left: 10px; /* Space between the main nav icons and logout */
+    order: 2;
+  }
+  .sidebar {
+    display: none;
+  }
 
-    .main-content {
-        margin-left: 0;
-        padding-top: calc(60px + 20px);
-    }
-    footer p {
-        margin-left: 0;
-    }
+  .main-content {
+    margin-left: 0;
+    padding-top: calc(60px + 20px);
+  }
+  footer p {
+    margin-left: 0;
+  }
 
-    #profile .profile .ceo-image {
-        margin-top: 90px;
-        width: 350px;
-        height: 350px;
-        margin-left: 0;
-    }
-    .greeting {
-        text-align: center;
-        margin-left: 0;
-    }
-    .courses-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .course-card {
-        width: 90%;
-        margin-bottom: 20px;
-    }
-    .course-card img {
-        height: 150px;
-    }
-    .enroll-button {
-        width: 200px;
-        font-size: 0.8rem;
-    }
+  #profile .profile .ceo-image {
+    margin-top: 90px;
+    width: 350px;
+    height: 350px;
+    margin-left: 0;
+  }
+  .greeting {
+    text-align: center;
+    margin-left: 0;
+  }
+  .courses-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .course-card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  .course-card img {
+    height: 150px;
+  }
+  .enroll-button {
+    width: 200px;
+    font-size: 0.8rem;
+  }
 }
 /* --- End of Media Queries --- */

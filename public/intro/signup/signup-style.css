@@ -1,449 +1,457 @@
 :root {
-    --primary-color: #00d3ff;
-    --text-color: #ffffff;
-    --font-family: 'Arial', sans-serif;
-    --font-size: 16px;
-    --line-height: 1.5;
-    --background-color: #080e14;
-    --form-background: #101820;
-    --input-border: #222f3d;
-    --input-focus: #009fcc;
-    --button-hover: #009fcc;
-    --footer-background: #080e14;
-    --footer-text-color: #ffffff;
-    --error-color: #ff3939;
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
+  --error-color: #ff3939;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body {
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding-bottom: 60px;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--background-color);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1px 20px;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .header-logo a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 800;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
 }
 
 .header-logo a img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
 }
 
 header nav {
-    margin-left: 1130px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
+  margin-left: 1130px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 header nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
 }
 
 header nav ul li {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
 header nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 600;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
 header nav ul li a:hover {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 main.signup-container {
-    max-width: 600px;
-    margin: 120px auto;
-    padding: 30px;
-    background-color: var(--form-background);
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 120px auto;
+  padding: 30px;
+  background-color: var(--form-background);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 main.signup-container h2 {
-    font-size: 2.5rem;
-    color: var(--text-color);
-    text-align: center;
-    margin-top: 1px;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 1px;
 }
 
 .form-group {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .form-group label {
-    font-size: 0.9rem;
-    display: block;
-    color: var(--text-color);
-    margin-bottom: 8px;
+  font-size: 0.9rem;
+  display: block;
+  color: var(--text-color);
+  margin-bottom: 8px;
 }
 
 /* New: Container for password input and toggle icon */
 .password-input-container {
-    position: relative; /* Allows absolute positioning of the icon */
-    width: 100%;
+  position: relative; /* Allows absolute positioning of the icon */
+  width: 100%;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--input-border);
-    border-radius: 6px;
-    background-color: transparent;
-    color: var(--text-color);
-    box-sizing: border-box;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-    padding-right: 40px; /* Make space for the icon */
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-color);
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  padding-right: 40px; /* Make space for the icon */
 }
 
 .form-group input[type="text"]:focus,
 .form-group input[type="email"]:focus,
 .form-group input[type="password"]:focus {
-    outline: none;
-    border-color: var(--primary-color);
+  outline: none;
+  border-color: var(--primary-color);
 }
 
 /* Shake effect for errors */
 .shake-error {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    border-color: var(--error-color) !important; /* Emphasize error with red border */
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border-color: var(
+    --error-color
+  ) !important; /* Emphasize error with red border */
 }
 
 @keyframes shake {
-    10%, 90% {
-        transform: translate3d(-1px, 0, 0);
-    }
-    20%, 80% {
-        transform: translate3d(2px, 0, 0);
-    }
-    30%, 50%, 70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-    40%, 60% {
-        transform: translate3d(4px, 0, 0);
-    }
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 /* New: Styles for the password toggle icon */
 .toggle-password {
-    position: absolute;
-    right: 12px; /* Adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    display: flex; /* To vertically align the image */
-    align-items: center;
-    justify-content: center;
-    width: 24px; /* Size of the clickable area */
-    height: 24px;
-    z-index: 2; /* Ensure it's above the input */
+  position: absolute;
+  right: 12px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex; /* To vertically align the image */
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Size of the clickable area */
+  height: 24px;
+  z-index: 2; /* Ensure it's above the input */
 }
 
 .toggle-password img {
-    width: 20px; /* Actual size of the eye icon */
-    height: 20px;
-    filter: invert(1); /* To make the black icon visible on dark background */
-    transition: opacity 0.3s ease;
+  width: 20px; /* Actual size of the eye icon */
+  height: 20px;
+  filter: invert(1); /* To make the black icon visible on dark background */
+  transition: opacity 0.3s ease;
 }
 
 .toggle-password img:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
-
 .signup-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    margin: 25px auto;
-    width: 250px;
-    display: block;
-    transition: background-color 0.3s;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin: 25px auto;
+  width: 250px;
+  display: block;
+  transition: background-color 0.3s;
 }
 
 .signup-button:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 .login-link {
-    font-size: 0.8rem;
-    text-align: center;
-    margin-top: 25px;
-    color: var(--text-color);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 25px;
+  color: var(--text-color);
 }
 
 .login-link a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 .login-link a:hover {
-    color: var(--button-hover);
-    text-decoration: none;
+  color: var(--button-hover);
+  text-decoration: none;
 }
 
 footer {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 1px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 1px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 footer p {
-    margin-top: 10px;
-    font-size: 0.7rem;
-    color: var(--text-color);
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: var(--text-color);
 }
 
 /* Media Queries for Responsiveness */
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    header nav {
-        margin-left: 1130px;
-    }
+  header nav {
+    margin-left: 1130px;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) {
-    header nav {
-        margin-left: auto;
-        justify-content: flex-end;
-    }
+  header nav {
+    margin-left: auto;
+    justify-content: flex-end;
+  }
 
-    main.signup-container {
-        max-width: 550px;
-        margin: 120px auto;
-        padding: 25px;
-    }
+  main.signup-container {
+    max-width: 550px;
+    margin: 120px auto;
+    padding: 25px;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
-    header {
-        justify-content: space-between;
-        padding: 10px 20px;
-    }
+  header {
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
 
-    header nav {
-        margin-left: 0;
-        justify-content: flex-end;
-        width: auto;
-    }
+  header nav {
+    margin-left: 0;
+    justify-content: flex-end;
+    width: auto;
+  }
 
-    header nav ul {
-        gap: 15px;
-    }
+  header nav ul {
+    gap: 15px;
+  }
 
-    header nav ul li a {
-        margin-right: 0;
-        font-size: 0.9rem;
-    }
+  header nav ul li a {
+    margin-right: 0;
+    font-size: 0.9rem;
+  }
 
-    main.signup-container {
-        max-width: 500px;
-        margin: 100px auto;
-        padding: 25px;
-    }
+  main.signup-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 25px;
+  }
 
-    main.signup-container h2 {
-        font-size: 2.2rem;
-    }
+  main.signup-container h2 {
+    font-size: 2.2rem;
+  }
 
-    .form-group label {
-        font-size: 0.85rem;
-    }
+  .form-group label {
+    font-size: 0.85rem;
+  }
 
-    .form-group input {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
+  .form-group input {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 
-    .signup-button {
-        width: 220px;
-        font-size: 0.75rem;
-        padding: 9px;
-    }
+  .signup-button {
+    width: 220px;
+    font-size: 0.75rem;
+    padding: 9px;
+  }
 
-    .login-link {
-        font-size: 0.75rem;
-    }
+  .login-link {
+    font-size: 0.75rem;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
-    }
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
 
-    header nav {
-        display: flex;
-        justify-content: flex-end;
-        margin-left: 0;
-        width: auto;
-    }
+  header nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 0;
+    width: auto;
+  }
 
-    header nav ul {
-        gap: 10px;
-    }
+  header nav ul {
+    gap: 10px;
+  }
 
-    header nav ul li a {
-        margin-right: 0;
-        font-size: 0.9rem;
-        font-weight: 800;
-    }
+  header nav ul li a {
+    margin-right: 0;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
 
-    main.signup-container {
-        max-width: 90%;
-        margin: 80px auto 20px auto;
-        padding: 20px;
-    }
+  main.signup-container {
+    max-width: 90%;
+    margin: 80px auto 20px auto;
+    padding: 20px;
+  }
 
-    main.signup-container h2 {
-        font-size: 2rem;
-    }
+  main.signup-container h2 {
+    font-size: 2rem;
+  }
 
-    .form-group label {
-        font-size: 0.8rem;
-    }
+  .form-group label {
+    font-size: 0.8rem;
+  }
 
-    .form-group input {
-        padding: 10px;
-        font-size: 0.85rem;
-    }
+  .form-group input {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
 
-    .signup-button {
-        width: 200px;
-        font-size: 0.7rem;
-        padding: 8px;
-    }
+  .signup-button {
+    width: 200px;
+    font-size: 0.7rem;
+    padding: 8px;
+  }
 
-    .login-link {
-        font-size: 0.7rem;
-    }
+  .login-link {
+    font-size: 0.7rem;
+  }
 }
 
 /* Extra small devices (phones, less than 576px) */
 @media (max-width: 575px) {
-    header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 10px;
-    }
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
 
-    .header-logo a {
-        margin-bottom: 0;
-    }
+  .header-logo a {
+    margin-bottom: 0;
+  }
 
-    header nav {
-        display: flex;
-        justify-content: flex-end;
-        margin-left: 0;
-        width: auto;
-    }
+  header nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 0;
+    width: auto;
+  }
 
-    header nav ul {
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-        padding: 0;
-        width: auto;
-        text-align: right;
-    }
+  header nav ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    width: auto;
+    text-align: right;
+  }
 
-    header nav ul li a {
-        margin-right: 0;
-        font-size: 0.9rem;
-        font-weight: 800;
-    }
+  header nav ul li a {
+    margin-right: 0;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
 
-    main.signup-container {
-        max-width: 95%;
-        margin: 150px auto 20px auto;
-        padding: 15px;
-    }
+  main.signup-container {
+    max-width: 95%;
+    margin: 150px auto 20px auto;
+    padding: 15px;
+  }
 
-    main.signup-container h2 {
-        font-size: 1.8rem;
-    }
+  main.signup-container h2 {
+    font-size: 1.8rem;
+  }
 
-    .form-group label {
-        font-size: 0.75rem;
-    }
+  .form-group label {
+    font-size: 0.75rem;
+  }
 
-    .form-group input {
-        padding: 8px;
-        font-size: 0.8rem;
-    }
+  .form-group input {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
 
-    .signup-button {
-        width: 180px;
-        font-size: 0.65rem;
-        padding: 7px;
-        margin: 20px auto;
-    }
+  .signup-button {
+    width: 180px;
+    font-size: 0.65rem;
+    padding: 7px;
+    margin: 20px auto;
+  }
 
-    .login-link {
-        font-size: 0.65rem;
-    }
+  .login-link {
+    font-size: 0.65rem;
+  }
 
-    footer p {
-        font-size: 0.6rem;
-    }
+  footer p {
+    font-size: 0.6rem;
+  }
 }

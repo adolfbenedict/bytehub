@@ -1,119 +1,121 @@
 :root {
-    --primary-color: #00d3ff;
-    --text-color: #ffffff;
-    --font-family: 'Arial', sans-serif;
-    --font-size: 16px;
-    --line-height: 1.5;
-    --background-color: #080e14;
-    --form-background: #101820;
-    --input-border: #222f3d;
-    --input-focus: #009fcc;
-    --button-hover: #009fcc;
-    --footer-background: #080e14;
-    --footer-text-color: #ffffff;
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
 }
 
 body {
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding-bottom: 6px;
-    box-sizing: border-box;
-    overflow-x: hidden;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
-
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--background-color);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1px 20px;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .header-logo a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 800;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
 }
 
 .header-logo a img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
 }
-
 
 .logout-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 100px 20px;
-    min-height: calc(100vh - 140px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px;
+  min-height: calc(100vh - 140px);
 }
 
-
 .logout-container p {
-    font-size: 1rem;
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .logout-progress {
-    background-color: #ddd;
-    width: 40%;
-    max-width: 400px;
-    height: 10px;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-    overflow: hidden;
+  background-color: #ddd;
+  width: 40%;
+  max-width: 400px;
+  height: 10px;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .logout-progress .progress-bar {
-    background-color: var(--primary-color);
-    height: 10px;
-    border-radius: 5px;
-    width: 0%;
-    animation: fillProgressBar 3s ease-in-out forwards;
+  background-color: var(--primary-color);
+  height: 10px;
+  border-radius: 5px;
+  width: 0%;
+  animation: fillProgressBar 3s ease-in-out forwards;
 }
 
 @keyframes fillProgressBar {
-    from { width: 0%; }
-    to { width: 100%; }
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
-
 footer {
-    background-color: var(--footer-background);
-    color: var(--footer-text-color);
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin-top: 20px;
+  background-color: var(--footer-background);
+  color: var(--footer-text-color);
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
 }
 
 footer p {
-    margin-top: 0;
-    font-size: 0.8rem;
-    color: var(--footer-text-color);
+  margin-top: 0;
+  font-size: 0.8rem;
+  color: var(--footer-text-color);
 }

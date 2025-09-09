@@ -1,281 +1,294 @@
 /* Universal box-sizing for consistent layout */
-*, *::before, *::after {
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 :root {
-    --primary-color: #00d3ff;
-    --text-color: #ffffff;
-    --font-family: 'Arial', sans-serif;
-    --font-size: 16px;
-    --line-height: 1.5;
-    --background-color: #080e14;
-    --form-background: #101820;
-    --input-border: #222f3d;
-    --input-focus: #009fcc;
-    --button-hover: #009fcc;
-    --footer-background: #080e14;
-    --footer-text-color: #ffffff;
-    --box-shadow:  0 4px 8px rgba(0, 0, 0, 0.2);
-    --error-color: #ff3939;
-    --success-color: #4CAF50;
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --error-color: #ff3939;
+  --success-color: #4caf50;
 }
 
 body {
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    user-select: none;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  user-select: none;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--background-color);
-    display: flex;
-    align-items: center;
-    /* Changed to space-between to push logo and dashboard link to edges */
-    justify-content: space-between;
-    padding: 1px 20px;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  /* Changed to space-between to push logo and dashboard link to edges */
+  justify-content: space-between;
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 header a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 800;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
 }
 
 header a img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-    transition: transform 0.3s;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  transition: transform 0.3s;
 }
 
 /* Remove fixed margin-left to allow flexbox to handle spacing */
 .header-text {
-    /* margin-left: 1260px; /* REMOVED */
-    margin-left: 10px; /* Small margin for closer grouping if needed, but justify-content usually handles */
+  /* margin-left: 1260px; /* REMOVED */
+  margin-left: 10px; /* Small margin for closer grouping if needed, but justify-content usually handles */
 }
 
 header .header-text a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 800;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  transition: color 0.3s ease;
 }
 
 header .header-text a:hover {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .settings-container {
-    background-color: var(--form-background);
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    /* Adjust margin for better spacing, especially clearing the fixed header */
-    margin: 80px auto 20px; /* Top margin to clear fixed header, auto for horizontal centering, 20px bottom */
-    max-width: 800px; /* Limit max-width for readability on large screens */
-    width: 90%; /* Use a higher percentage width for better fill on smaller screens */
-    color: var(--text-color);
-    flex: 1;
-    overflow-y: auto;
-    position: relative;
-    /* box-sizing is handled by universal selector now */
+  background-color: var(--form-background);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  /* Adjust margin for better spacing, especially clearing the fixed header */
+  margin: 80px auto 20px; /* Top margin to clear fixed header, auto for horizontal centering, 20px bottom */
+  max-width: 800px; /* Limit max-width for readability on large screens */
+  width: 90%; /* Use a higher percentage width for better fill on smaller screens */
+  color: var(--text-color);
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  /* box-sizing is handled by universal selector now */
 }
 
 .settings-container h1 {
-    color: var(--primary-color);
-    text-align: center;
-    margin-bottom: 25px; /* More space below heading */
-    font-size: 1.8rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 25px; /* More space below heading */
+  font-size: 1.8rem;
 }
 
 .setting-group {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--input-border);
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    /* Default to stacking on small screens */
-    flex-direction: column;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--input-border);
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  /* Default to stacking on small screens */
+  flex-direction: column;
 }
 
 .setting-group:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .setting-item {
-    margin-bottom: 15px;
-    /* Default to full width on small screens */
-    flex: 1 1 100%;
+  margin-bottom: 15px;
+  /* Default to full width on small screens */
+  flex: 1 1 100%;
 }
 
 .setting-item label {
-    display: block;
-    font-size: 0.9rem; /* Slightly larger for readability */
-    color: var(--text-color);
-    margin-bottom: 5px;
+  display: block;
+  font-size: 0.9rem; /* Slightly larger for readability */
+  color: var(--text-color);
+  margin-bottom: 5px;
 }
 
 .setting-item input[type="email"] {
-    width: 100%;
-    padding: 14px; /* Increased padding for better touch targets */
-    margin-bottom: 8px;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    background-color: transparent;
-    color: var(--text-color);
-    font-size: 0.9rem;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 14px; /* Increased padding for better touch targets */
+  margin-bottom: 8px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
 }
 
 .setting-item input[type="email"]:focus {
-    outline: none;
-    border-color: var(--input-focus);
+  outline: none;
+  border-color: var(--input-focus);
 }
 
 .profile-picture-display {
-    width: 100px; /* Slightly larger for better visibility */
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid var(--primary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    margin-top: 5px;
+  width: 100px; /* Slightly larger for better visibility */
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 5px;
 }
 
 #fixedProfilePicture {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .reset-password-button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 12px 20px; /* Increased padding */
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem; /* Consistent font size */
-    cursor: pointer;
-    margin-top: 5px;
-    display: inline-block; /* Allows padding and maintains flow */
-    transition: background-color 0.3s;
-    width: auto; /* Allow natural sizing */
-    max-width: 100%; /* Prevent overflow on small screens */
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem; /* Consistent font size */
+  cursor: pointer;
+  margin-top: 5px;
+  display: inline-block; /* Allows padding and maintains flow */
+  transition: background-color 0.3s;
+  width: auto; /* Allow natural sizing */
+  max-width: 100%; /* Prevent overflow on small screens */
 }
 
 .reset-password-button:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 
 .toast {
-    display: none; /* Initially hidden */
-    position: fixed;
-    bottom: 20px; /* Adjust position for better visibility on mobile */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--error-color);
-    color: white;
-    padding: 16px;
-    border-radius: 5px;
-    z-index: 1000;
-    opacity: 1;
-    transition: opacity 1s ease;
-    animation: shake 0.5s ease-in-out 2 forwards;
-    width: 90%; /* Make toast wider on small screens */
-    text-align: center; /* Center text within toast */
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--error-color);
+  color: white;
+  padding: 16px;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease;
+  animation: shake 0.5s ease-in-out 2 forwards;
+  width: 90%; /* Make toast wider on small screens */
+  text-align: center; /* Center text within toast */
 }
 
 @keyframes shake {
-    0% { transform: translateX(-50%) translateX(0px); }
-    25% { transform: translateX(-50%) translateX(-5px); }
-    50% { transform: translateX(-50%) translateX(5px); }
-    75% { transform: translateX(-50%) translateX(-5px); }
-    100% { transform: translateX(-50%) translateX(0px); }
+  0% {
+    transform: translateX(-50%) translateX(0px);
+  }
+  25% {
+    transform: translateX(-50%) translateX(-5px);
+  }
+  50% {
+    transform: translateX(-50%) translateX(5px);
+  }
+  75% {
+    transform: translateX(-50%) translateX(-5px);
+  }
+  100% {
+    transform: translateX(-50%) translateX(0px);
+  }
 }
 
 #toast.success {
-    background-color: var(--success-color);
+  background-color: var(--success-color);
 }
 
 #toast.error {
-    background-color: var(--error-color);
+  background-color: var(--error-color);
 }
 
 footer {
-    background-color: var(--footer-background);
-    color: var(--footer-text-color);
-    text-align: center;
-    padding: 15px; /* Ensure consistent padding */
-    margin-top: 0;
-    font-size: 0.8rem; /* Slightly larger for readability */
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  background-color: var(--footer-background);
+  color: var(--footer-text-color);
+  text-align: center;
+  padding: 15px; /* Ensure consistent padding */
+  margin-top: 0;
+  font-size: 0.8rem; /* Slightly larger for readability */
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 /* --- Media Queries for Responsiveness --- */
 
 /* For screens larger than 600px (e.g., tablets and larger phones) */
 @media (min-width: 600px) {
-    .settings-container {
-        padding: 35px; /* More padding on larger screens */
-    }
+  .settings-container {
+    padding: 35px; /* More padding on larger screens */
+  }
 
-    .setting-group {
-        flex-direction: row; /* Layout items in a row */
-    }
+  .setting-group {
+    flex-direction: row; /* Layout items in a row */
+  }
 
-    .setting-item {
-        /* Distribute space for two columns, accounting for gap */
-        flex: 1 1 calc(50% - 15px);
-    }
+  .setting-item {
+    /* Distribute space for two columns, accounting for gap */
+    flex: 1 1 calc(50% - 15px);
+  }
 }
 
 /* For screens larger than 992px (e.g., desktops) */
 @media (min-width: 992px) {
-    .settings-container {
-        padding: 40px; /* Even more padding for a desktop feel */
-        margin-top: 100px; /* Adjust top margin for larger header, if header increases in height */
-    }
+  .settings-container {
+    padding: 40px; /* Even more padding for a desktop feel */
+    margin-top: 100px; /* Adjust top margin for larger header, if header increases in height */
+  }
 
-    .settings-container h1 {
-        font-size: 2.2rem; /* Larger heading */
-    }
+  .settings-container h1 {
+    font-size: 2.2rem; /* Larger heading */
+  }
 
-    .setting-item label {
-        font-size: 1rem; /* Base font size for labels */
-    }
+  .setting-item label {
+    font-size: 1rem; /* Base font size for labels */
+  }
 
-    .setting-item input[type="email"] {
-        font-size: 1rem; /* Base font size for inputs */
-    }
+  .setting-item input[type="email"] {
+    font-size: 1rem; /* Base font size for inputs */
+  }
 
-    .reset-password-button {
-        padding: 14px 25px;
-        font-size: 1rem;
-    }
+  .reset-password-button {
+    padding: 14px 25px;
+    font-size: 1rem;
+  }
 }
