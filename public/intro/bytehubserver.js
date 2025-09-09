@@ -26,14 +26,6 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'signup', 'signup.html'));
-});
-
-
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 const EMAIL_USERNAME = process.env.EMAIL_USERNAME;
