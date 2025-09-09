@@ -28,6 +28,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 const EMAIL_USERNAME = process.env.EMAIL_USERNAME;
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+const FRONTEND_URL = 'https://bytehub-one.vercel.app'; // Your Vercel frontend URL
 
 if (!EMAIL_PASSWORD || !EMAIL_USERNAME) {
     console.error('Missing EMAIL_USERNAME or EMAIL_PASSWORD environment variables.');
@@ -53,6 +54,8 @@ const userInfoSchema = new mongoose.Schema({
     isVerified: { type: Boolean, default: false },
     verificationToken: String,
     verificationTokenExpires: Date,
+    resetPasswordToken: String, // New field for password reset
+    resetPasswordExpires: Date, // New field for password reset
 });
 
 const UserInfo = mongoose.model('userINFO', userInfoSchema);
@@ -71,6 +74,28 @@ const sendVerificationEmail = async (email, code) => {
                         ${code}
                     </div>
                     <p style="color: #666;">This code is valid for 1 hour. If you did not request this, please ignore this email.</p>
+                    <p style="color: #666; font-size: 12px; margin-top: 30px;">&copy; 2025 Byte Hub. All rights reserved.</p>
+                </div>
+            </div>
+        `,
+    };
+    await transporter.sendMail(mailOptions);
+};
+
+const sendPasswordResetEmail = async (email, token) => {
+    const resetUrl = `${FRONTEND_URL}/reset-password/reset-password.html?token=${token}`;
+    const mailOptions = {
+        from: EMAIL_USERNAME,
+        to: email,
+        subject: 'Byte Hub - Password Reset',
+        html: `
+            <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; text-align: center;">
+                <div style="background-color: #fff; max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                    <h2 style="color: #333;">Password Reset Request</h2>
+                    <p style="color: #666;">You are receiving this because you have requested the reset of the password for your account.</p>
+                    <p style="color: #666;">Please click on the following button to reset your password:</p>
+                    <a href="${resetUrl}" style="background-color: #00d3ff; color: #fff; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 20px 0;">Reset Password</a>
+                    <p style="color: #666;">If you did not request this, please ignore this email and your password will remain unchanged.</p>
                     <p style="color: #666; font-size: 12px; margin-top: 30px;">&copy; 2025 Byte Hub. All rights reserved.</p>
                 </div>
             </div>
@@ -216,6 +241,58 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         console.error('Error occurred during login:', err);
         res.status(500).json({ error: 'Error logging in.' });
+    }
+});
+
+// NEW: Forgot password endpoint
+app.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await UserInfo.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ message: 'If a user with that email exists, a password reset link has been sent.' });
+        }
+
+        const resetPasswordToken = crypto.randomBytes(20).toString('hex');
+        user.resetPasswordToken = resetPasswordToken;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        await user.save();
+
+        await sendPasswordResetEmail(user.email, resetPasswordToken);
+
+        res.status(200).json({ message: 'If a user with that email exists, a password reset link has been sent.' });
+    } catch (error) {
+        console.error('Error in /forgot-password:', error);
+        res.status(500).json({ error: 'Error sending password reset email.' });
+    }
+});
+
+// NEW: Reset password endpoint
+app.post('/reset-password', async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        const user = await UserInfo.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() },
+        });
+
+        if (!user) {
+            return res.status(400).json({ error: 'Password reset token is invalid or has expired.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Password has been reset successfully.' });
+    } catch (error) {
+        console.error('Error in /reset-password:', error);
+        res.status(500).json({ error: 'Error resetting password.' });
     }
 });
 
