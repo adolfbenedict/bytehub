@@ -27,8 +27,7 @@ body {
   overflow-x: hidden;
 }
 
-a,
-button {
+a, button, .hamburger {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
