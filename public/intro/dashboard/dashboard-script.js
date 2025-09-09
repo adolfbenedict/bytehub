@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`${BACKEND_URL}/contact`, {
+                const response = await fetch('https://bytehubserver.onrender.com/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
