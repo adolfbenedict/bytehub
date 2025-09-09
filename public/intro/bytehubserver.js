@@ -293,6 +293,32 @@ app.post('/reset-password', async (req, res) => {
     }
 });
 
+app.post('/contact', async (req, res) => {
+    const { email, message } = req.body;
+
+    if (!email || !message) {
+        return res.status(400).json({ error: 'Email and message are required.' });
+    }
+
+    const mailOptions = {
+        from: email,
+        to: EMAIL_USERNAME,
+        subject: 'New Contact Form Submission from Byte Hub',
+        html: `
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong> ${message}</p>
+        `,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: 'Message sent successfully!' });
+    } catch (error) {
+        console.error('Error sending contact form email:', error);
+        res.status(500).json({ error: 'Error sending message.' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
