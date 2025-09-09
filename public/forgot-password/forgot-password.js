@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = emailInput.value;
 
         try {
-            const response = await fetch('/forgot-password', {
+            const response = await fetch(`${BACKEND_URL}/forgot-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

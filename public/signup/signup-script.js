@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = { username, email, password };
 
         try {
-            const response = await fetch(`https://bytehub.onrender.com/signup`, {
+            const response = await fetch(`${BACKEND_URL}/api/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

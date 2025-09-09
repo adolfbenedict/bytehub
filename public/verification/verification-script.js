@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`https://bytehub.onrender.com/verification`, {
+            const response = await fetch(`${BACKEND_URL}/api/verification`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            const response = await fetch(`https://bytehub.onrender.com/resend-code`, { // Make sure this URL is correct
+            const response = await fetch(`${BACKEND_URL}/api/resend-code`, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
