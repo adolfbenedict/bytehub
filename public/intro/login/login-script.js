@@ -7,6 +7,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const username = usernameInput.value;
     const password = passwordInput.value;
 
+    const BACKEND_URL = 'https://bytehubserver.onrender.com';
+
     function triggerShake(element) {
         element.classList.add('shake-error');
         element.addEventListener('animationend', () => {
@@ -15,7 +17,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 
     try {
-        const response = await fetch(`${BACKEND_URL}/api/login`, {
+        const response = await fetch(`${BACKEND_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,16 +27,13 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         const data = await response.json();
 
-        if (response.ok && data.redirect) {
+        if (response.ok) {
             localStorage.setItem('username', username);
             if (data.email) {
                 localStorage.setItem('email', data.email);
             }
             console.log('Login successful. Redirecting...');
-            window.location.href = data.redirect;
-        } else if (data.redirect) {
-            alert(data.error);
-            window.location.href = data.redirect;
+            window.location.href = '../dashboard/dashboard.html';
         } else {
             console.error('Login failed:', data.error || 'Unknown error');
             alert(data.error || 'Login failed. Please try again.');

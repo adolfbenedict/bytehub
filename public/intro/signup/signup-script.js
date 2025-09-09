@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const toast = document.getElementById('toast');
 
+    const BACKEND_URL = 'https://bytehubserver.onrender.com';
+
     function showToast(message, isError = false) {
         toast.textContent = message;
         toast.className = 'toast show';
@@ -109,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = { username, email, password };
 
         try {
-            const response = await fetch(`${BACKEND_URL}/api/signup`, {
+            const response = await fetch(`${BACKEND_URL}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,10 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('userEmail', email);
                 console.log('Stored in localStorage:', { email: email });
                 
-                // CORRECTED: Use the redirect URL from the server's response
-                if (responseData.redirect) {
-                    window.location.href = responseData.redirect;
-                }
+                window.location.href = '../verification/verification.html'; 
             } else {
                 showToast(responseData.error, true);
                 logError('Signup failed: ' + responseData.error);
