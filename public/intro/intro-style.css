@@ -25,9 +25,6 @@ body {
   scroll-behavior: smooth; /* Enables smooth scrolling */
   user-select: none; /* Prevents text selection */
   overflow-x: hidden;
-}
-
-a, button, .hamburger {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
