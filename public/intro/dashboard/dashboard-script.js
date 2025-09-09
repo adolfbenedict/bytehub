@@ -119,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     alert(data.message);
-                    helpForm.reset();
+                    // Instead of a full form reset, just clear the message textarea
+                    document.getElementById('textarea').value = '';
                 } else {
                     alert(data.error);
                 }
