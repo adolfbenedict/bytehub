@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const helpForm = document.getElementById('helpForm');
     const emailInputHelp = document.querySelector('#helpForm input[type="email"]');
     const courseButtons = document.querySelectorAll('.enroll-button');
-    // Select all links in the header navigation for disabling/enabling
     const headerNavLinks = document.querySelectorAll('.header-nav-icons a');
-    // Select all links in the sidebar for disabling/enabling
     const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
 
     async function fetchUserData() {
@@ -48,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function disableAllControls() {
-        // Disable all header nav links except #courses (if applicable)
         headerNavLinks.forEach(link => {
             if (!link.getAttribute('href').includes('#courses')) {
                 link.style.pointerEvents = 'none';
@@ -56,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Disable all sidebar links except #courses (if applicable)
         sidebarLinks.forEach(link => {
             if (!link.getAttribute('href').includes('#courses')) {
                 link.style.pointerEvents = 'none';
@@ -69,13 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function enableAllControls() {
-        // Enable all header nav links
         headerNavLinks.forEach(link => {
             link.style.pointerEvents = 'auto';
             link.style.opacity = '1';
         });
 
-        // Enable all sidebar links
         sidebarLinks.forEach(link => {
             link.style.pointerEvents = 'auto';
             link.style.opacity = '1';
@@ -87,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchUserData();
 
-    // Event listener for anchor links in header nav and sidebar to smooth scroll
     document.querySelectorAll('.header-nav-icons a, .sidebar-menu a').forEach(link => {
         link.addEventListener('click', function(event) {
             if (this.getAttribute('href').startsWith('#')) {
@@ -101,36 +94,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     if (helpForm) {
-        helpForm.addEventListener('submit', (event) => {
-            console.log('Help form submitted.');
+        helpForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = emailInputHelp.value;
+            const message = document.getElementById('textarea').value;
+
+            if (!email || !message) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, message }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                    helpForm.reset();
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('An error occurred. Please try again later.');
+            }
         });
     }
 
-    // Adjust layout based on window resize
     const handleResize = () => {
-        if (window.innerWidth > 991) { // Desktop view: Sidebar visible, header nav hidden
-            sidebar.style.transform = 'translateX(0)'; // Sidebar always open
-            sidebar.style.display = 'block'; // Ensure sidebar is block for transition
-            mainContent.style.marginLeft = '200px'; // Push main content
-            headerNavLinks.forEach(link => link.parentElement.style.display = 'none'); // Hide header nav icons
-        } else { // Mobile/Tablet view: Sidebar hidden, header nav visible
-            sidebar.style.transform = 'translateX(-100%)'; // Sidebar always hidden
-            sidebar.style.display = 'none'; // Ensure sidebar is fully hidden
-            mainContent.style.marginLeft = '0'; // Main content full width
-            headerNavLinks.forEach(link => link.parentElement.style.display = 'flex'); // Show header nav icons
+        if (window.innerWidth > 991) {
+            sidebar.style.transform = 'translateX(0)';
+            sidebar.style.display = 'block';
+            mainContent.style.marginLeft = '200px';
+            headerNavLinks.forEach(link => link.parentElement.style.display = 'none');
+        } else {
+            sidebar.style.transform = 'translateX(-100%)';
+            sidebar.style.display = 'none';
+            mainContent.style.marginLeft = '0';
+            headerNavLinks.forEach(link => link.parentElement.style.display = 'flex');
         }
-        // Ensure no-scroll is off since there's no dynamic sidebar
         document.body.classList.remove('no-scroll');
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Initial call to handleResize on page load
     handleResize();
 
-    // Auto update year in footer
     const footerParagraph = document.querySelector('footer p');
     if (footerParagraph) {
         const currentYear = new Date().getFullYear();
