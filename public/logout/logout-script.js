@@ -36,7 +36,7 @@ const interval = setInterval(() => {
         clearInterval(interval);
         setTimeout(() => {
             // Redirect to the intro page
-            window.location.href = "/HTML/Byte Hub/public/intro/intro.html";
+            window.location.href = "/HTML/Byte Hub/public/intro/index.html";
         }, 900);
     }
 }, 20);
