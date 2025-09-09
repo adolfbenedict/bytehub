@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
             showToast(data.message, 'success');
             setTimeout(() => {
-                window.location.href = '/HTML/Byte Hub/public/login/login.html';
+                window.location.href = '../login/login.html';
             }, 3000);
         } else {
             showToast(data.error, 'error');

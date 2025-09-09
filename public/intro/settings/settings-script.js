@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetPasswordButton.addEventListener('click', () => {
 
-        window.location.href = '/HTML/Byte Hub/public/reset-password/reset-password.html';
+        window.location.href = '../reset-password/reset-password.html';
     });
 
     dashboardLink.addEventListener('click', (event) => {
         event.preventDefault();
-        window.location.href = '/HTML/Byte Hub/public/dashboard/dashboard.html';
+        window.location.href = '../dashboard/dashboard.html';
     });
 
 

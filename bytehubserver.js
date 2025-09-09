@@ -155,7 +155,7 @@ app.post('/verification', async (req, res) => {
         user.verificationTokenExpires = undefined;
         await user.save();
 
-        res.status(200).json({ message: 'Account verified successfully!', redirect: '/HTML/Byte Hub/public/login/login.html?verified=true' });
+        res.status(200).json({ message: 'Account verified successfully!', redirect: '../login/login.html?verified=true' });
     } catch (err) {
         console.error('Error during code verification:', err);
         res.status(500).json({ error: 'Error verifying code.' });
@@ -216,7 +216,7 @@ app.post('/login', async (req, res) => {
             await user.save();
             await sendVerificationEmail(user.email, newVerificationCode);
 
-            return res.status(403).json({ error: 'Please verify your email first. A new code has been sent.', redirect: '/HTML/Byte Hub/public/verification/verification.html' });
+            return res.status(403).json({ error: 'Please verify your email first. A new code has been sent.', redirect: '../verification/verification.html' });
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -224,7 +224,7 @@ app.post('/login', async (req, res) => {
             res.status(200).json({
                 message: 'Login successful!',
                 email: user.email,
-                redirect: '/HTML/Byte Hub/public/dashboard/dashboard.html'
+                redirect: '../dashboard/dashboard.html'
             });
         } else {
             res.status(401).json({ error: 'Invalid credentials.' });
