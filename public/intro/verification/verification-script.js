@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resendLink = document.getElementById('resendCode');
     const email = localStorage.getItem('userEmail');
 
+    const BACKEND_URL = 'https://bytehubserver.onrender.com';
+
     const showToast = (message, isError = false) => {
         toast.textContent = message;
         toast.className = 'toast show';
@@ -42,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`${BACKEND_URL}/api/verification`, {
+            // FIX: Removed /api/ from the URL
+            const response = await fetch(`${BACKEND_URL}/verification`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,10 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 showToast(data.message);
                 localStorage.removeItem('userEmail');
-                // Use the redirect URL from the server's response
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                }
+                // The frontend handles the redirect now
+                window.location.href = '../login/login.html?verified=true';
             } else {
                 showToast(data.error, true);
             }
@@ -71,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Logic to handle resending the code
     resendLink.addEventListener('click', async (e) => {
         e.preventDefault();
         if (!email) {
@@ -79,7 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            const response = await fetch(`${BACKEND_URL}/api/resend-code`, { 
+            // FIX: Removed /api/ from the URL
+            const response = await fetch(`${BACKEND_URL}/resend-code`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
