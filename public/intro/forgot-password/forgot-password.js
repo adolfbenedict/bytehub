@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailInput = document.getElementById('email');
     const toast = document.getElementById('toast');
 
+    // Hardcoded URL as requested
+    const BACKEND_URL = 'https://bytehubserver.onrender.com';
+
     function showToast(message, type = 'error') {
         toast.textContent = message;
         toast.className = `toast ${type}`;
