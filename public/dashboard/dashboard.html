@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://img.icons8.com/?size=100&id=11240&format=png&color=22C3E6" />
+    <title>Dashboard - Byte Hub</title>
+    <link
+      rel="stylesheet"
+      href="/HTML/Byte Hub/public/dashboard/dashboard-style.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+    <script
+      src="/HTML/Byte Hub/public/dashboard/dashboard-script.js"
+      defer></script>
+  </head>
+  <body>
+    <header>
+      <a href="/HTML/Byte Hub/public/intro/intro.html" class="logo">
+        <img
+          src="https://img.icons8.com/?size=100&id=11240&format=png&color=22C3E6"
+          alt="logo" />
+      </a>
+      <nav class="header-nav-icons">
+        <a href="#profile" title="Profile"
+          ><span class="material-icons">account_circle</span></a
+        >
+        <a href="#courses" title="Courses"
+          ><span class="material-icons">book</span></a
+        >
+        <a href="#help" title="Contact"
+          ><span class="material-icons">message</span></a
+        >
+        <a href="/HTML/Byte Hub/public/settings/settings.html" title="Settings"
+          ><span class="material-icons">settings</span></a
+        >
+      </nav>
+      <a
+        href="/HTML/Byte Hub/public/logout/logout.html"
+        title="Logout"
+        class="header-logout-icon">
+        <span class="material-icons">logout</span>
+      </a>
+    </header>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1>Dashboard</h1>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#profile">
+            <span class="material-icons">account_circle</span>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="#courses">
+            <span class="material-icons">book</span>
+            <span>Courses</span>
+          </a>
+        </li>
+        <li>
+          <a href="#help">
+            <span class="material-icons">message</span>
+            <span>Contact</span>
+          </a>
+        </li>
+        <li>
+          <a href="/HTML/Byte Hub/public/settings/settings.html">
+            <span class="material-icons">settings</span>
+            <span>Settings</span>
+          </a>
+        </li>
+        <li>
+          <a href="/HTML/Byte Hub/public/logout/logout.html">
+            <span class="material-icons">logout</span>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <section id="profile">
+      <div class="profile">
+        <img
+          src="https://images.pexels.com/photos/6424587/pexels-photo-6424587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          class="ceo-image"
+          alt="User Profile Picture" />
+        <div class="greeting">
+          <span id="displayName"></span>
+        </div>
+      </div>
+    </section>
+    <main class="main-content" id="mainContent">
+      <section class="courses-container" id="courses">
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/17489157/pexels-photo-17489157.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Cloud Computing" />
+          <h4>Cloud Computing</h4>
+          <p>
+            Understand the concepts of cloud services, deployment models, and
+            architecture.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/cloudcomputing/cloudcom.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Game Development" />
+          <h4>Game Development</h4>
+          <p>Study the basics of designing and developing video games.</p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/gamedev/gamedev.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="AI/ML" />
+          <h4>Artificial Intelligence</h4>
+          <p>
+            Discover the principles of AI and ML concepts and their applications
+            in IT.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/ai/ai.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/19089175/pexels-photo-19089175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Internet of Things (IoT)" />
+          <h4>Internet of Things (IoT)</h4>
+          <p>
+            Get in touch with the IoT, connecting objects for data collection
+            and automation.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/iot/iot.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Database Management" />
+          <h4>Database Management</h4>
+          <p>
+            Learn the fundamentals of database management and data handling.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/dbms/dbms.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/7267612/pexels-photo-7267612.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Blockchain Technology" />
+          <h4>Blockchain Technology</h4>
+          <p>Study more on blockchain, cryptocurrencies and smart contracts.</p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/blockchaintech/blockchaintech.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/1102797/pexels-photo-1102797.png?auto=compress&cs=tinysrgb&w=600"
+            alt="Programming" />
+          <h4>Programming</h4>
+          <p>Learn the fundamentals of programming and software development.</p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/programming/programming.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/31343632/pexels-photo-31343632.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Data Science" />
+          <h4>Data Science</h4>
+          <p>
+            Unlock the power of data with our comprehensive data science
+            courses.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/datascience/datascience.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Business" />
+          <h4>Business</h4>
+          <p>
+            Gain essential business skills to thrive in today's competitive
+            landscape.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/business/business.html'">
+            Enroll Now
+          </button>
+        </div>
+        <div class="course-card">
+          <img
+            src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Design" />
+          <h4>Design</h4>
+          <p>
+            Explore the principles of design and creativity in our engaging
+            courses.
+          </p>
+          <button
+            class="enroll-button"
+            id="enrollButton"
+            onclick="window.location.href='/HTML/Byte Hub/public/courses/design/design.html'">
+            Enroll Now
+          </button>
+        </div>
+      </section>
+
+      <section id="help">
+        <h2>Need a hand?</h2>
+        <div class="form-container">
+          <form
+            action="https://formspree.io/f/mpwddjgg"
+            method="POST"
+            id="helpForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" readonly />
+            </div>
+
+            <div class="form-group">
+              <label for="textarea">Message</label>
+              <textarea id="textarea" name="textarea" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="help-button" id="helpButton">
+                Send
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 Byte Hub. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,436 @@
+:root {
+  --primary-color: #00d3ff;
+  --text-color: #ffffff;
+  --font-family: "Arial", sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
+  --background-color: #080e14;
+  --form-background: #101820;
+  --input-border: #222f3d;
+  --input-focus: #009fcc;
+  --button-hover: #009fcc;
+  --footer-background: #080e14;
+  --footer-text-color: #ffffff;
+  --error-color: #ff3939;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding-bottom: 60px; /* Space for fixed footer */
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns logo to the left */
+  padding: 1px 20px;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.header-logo a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo a img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+header nav {
+  margin-left: 1130px; /* Desktop-specific margin */
+  display: flex; /* Ensure flex for centering/right-alignment */
+  align-items: center;
+  justify-content: flex-end; /* Align links to the right by default */
+  width: 100%; /* Take full width to allow flex-end to work */
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px; /* Use gap for spacing instead of right-margin on li */
+}
+
+header nav ul li {
+  margin-right: 50px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+main.login-container {
+  max-width: 600px;
+  margin: 150px auto;
+  padding: 30px;
+  background-color: var(--form-background);
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+main.login-container h2 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 1px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  display: block;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-color);
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.shake-error {
+  animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border-color: var(
+    --error-color
+  ) !important; /* Emphasize error with red border */
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.login-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin: 25px auto;
+  width: 250px;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: var(--button-hover);
+}
+
+.signup-link {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 25px;
+  color: var(--text-color);
+}
+
+.signup-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.signup-link a:hover,
+.forgot-password a:hover {
+  color: var(--button-hover);
+  text-decoration: none;
+}
+
+.forgot-password {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 15px;
+  color: var(--text-color);
+}
+
+.forgot-password a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 1px;
+  position: fixed; /* Keep footer fixed at bottom */
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+footer p {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  color: var(--text-color);
+}
+
+/* Media Queries for Responsiveness */
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  header nav {
+    margin-left: 1130px; /* Original large desktop margin */
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  header nav {
+    margin-left: auto; /* Allow nav to auto-adjust */
+    justify-content: flex-end; /* Align to the right */
+  }
+
+  main.login-container {
+    max-width: 550px;
+    margin: 120px auto;
+    padding: 25px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  header {
+    justify-content: space-between; /* Space out logo and nav */
+    padding: 10px 20px;
+  }
+
+  header nav {
+    margin-left: 0; /* Remove fixed margin */
+    justify-content: flex-end; /* Align to the right */
+    width: auto; /* Allow nav to shrink */
+  }
+
+  header nav ul {
+    gap: 15px;
+  }
+
+  header nav ul li a {
+    margin-right: -20px;
+    font-size: 0.9rem;
+  }
+
+  main.login-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 25px;
+  }
+
+  main.login-container h2 {
+    font-size: 2.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .login-button {
+    width: 220px;
+    font-size: 0.75rem;
+    padding: 9px;
+  }
+
+  .signup-link,
+  .forgot-password {
+    font-size: 0.75rem;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  header nav {
+    display: flex; /* Ensure nav is visible */
+    justify-content: flex-end;
+    margin-left: 0;
+    width: auto;
+  }
+
+  header nav ul {
+    gap: 10px;
+  }
+
+  header nav ul li a {
+    margin-right: -20px;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  main.login-container {
+    max-width: 90%; /* Take up more width */
+    margin: 80px auto 20px auto; /* Adjust top margin and add bottom margin */
+    padding: 20px;
+  }
+
+  main.login-container h2 {
+    font-size: 2rem;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .login-button {
+    width: 200px;
+    font-size: 0.7rem;
+    padding: 8px;
+  }
+
+  .signup-link,
+  .forgot-password {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+  }
+
+  .header-logo a {
+    margin-bottom: 0;
+  }
+
+  header nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 0;
+    width: auto;
+  }
+
+  header nav ul {
+    flex-direction: row; /* Keep horizontal on small screens for login page */
+    align-items: center;
+    gap: 8px;
+    padding: 0; /* Remove vertical padding */
+    width: auto; /* Allow content to dictate width */
+    text-align: right; /* Align links to the right */
+  }
+
+  header nav ul li a {
+    margin-right: -20px;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  main.login-container {
+    max-width: 95%; /* Even wider on smallest screens */
+    margin: 160px auto 20px auto; /* Adjust top margin */
+    padding: 15px;
+  }
+
+  main.login-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+  }
+
+  .form-group input {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+
+  .login-button {
+    width: 180px;
+    font-size: 0.65rem;
+    padding: 7px;
+    margin: 20px auto; /* Adjust margin for smaller buttons */
+  }
+
+  .signup-link,
+  .forgot-password {
+    font-size: 0.65rem;
+  }
+
+  footer p {
+    font-size: 0.6rem;
+  }
+}
