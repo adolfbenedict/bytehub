@@ -31,12 +31,34 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '../forgot-password/forgot-password.html';
     });
 
-    deleteAccountBtn.addEventListener('click', () => {
+    deleteAccountBtn.addEventListener('click', async () => {
         if (!deleteAccountBtn.disabled) {
-            alert('Account deletion is not yet implemented.');
-            deleteConfirmationInput.value = '';
-            deleteAccountBtn.disabled = true;
-            deleteAccountBtn.classList.add('disabled-btn');
+            const userEmail = localStorage.getItem('email');
+            if (!userEmail) {
+                window.location.href = '../index.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('https://bytehubserver.onrender.com/delete-account', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: userEmail }),
+                });
+
+                if (response.ok) {
+                    localStorage.clear();
+                    window.history.replaceState(null, null, '../index.html');
+                    window.location.href = '../index.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            } catch (error) {
+                console.error('Error deleting account:', error);
+                window.location.href = '../index.html';
+            }
         }
     });
 

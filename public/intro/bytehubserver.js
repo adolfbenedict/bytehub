@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
     origin: ['https://bytehub-one.vercel.app', 'https://bytehubserver.onrender.com'], 
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
 };
 app.use(cors(corsOptions));
@@ -316,6 +316,24 @@ app.post('/contact', async (req, res) => {
     } catch (error) {
         console.error('Error sending contact form email:', error);
         res.status(500).json({ error: 'Error sending message.' });
+    }
+});
+
+app.delete('/delete-account', async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required.' });
+    }
+
+    try {
+        const result = await UserInfo.deleteOne({ email: email });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: 'Account not found.' });
+        }
+        res.status(200).json({ message: 'Account deleted successfully!' });
+    } catch (error) {
+        console.error('Error deleting account:', error);
+        res.status(500).json({ error: 'An error occurred while deleting the account.' });
     }
 });
 
