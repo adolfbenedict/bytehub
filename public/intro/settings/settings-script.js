@@ -9,8 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const userEmail = localStorage.getItem('email');
         if (userEmail) {
             userEmailSpan.textContent = userEmail;
+            resetPasswordBtn.disabled = false;
+            resetPasswordBtn.classList.remove('disabled-btn');
         } else {
             userEmailSpan.textContent = 'Not logged in';
+            resetPasswordBtn.disabled = true;
+            resetPasswordBtn.classList.add('disabled-btn');
         }
     }
 
@@ -28,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resetPasswordBtn.addEventListener('click', () => {
-        window.location.href = '../forgot-password/forgot-password.html';
+        if (!resetPasswordBtn.disabled) {
+            window.location.href = '../forgot-password/forgot-password.html';
+        }
     });
 
     deleteAccountBtn.addEventListener('click', async () => {
