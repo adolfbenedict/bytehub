@@ -14,25 +14,15 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-
 const corsOptions = {
-    origin: 'http://127.0.0.1:5500', 
+    origin: 'https://bytehub-one.vercel.app', 
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
 app.use(cors(corsOptions));
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'signup', 'signup.html'));
-});
-
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -67,7 +57,6 @@ const userInfoSchema = new mongoose.Schema({
 
 const UserInfo = mongoose.model('userINFO', userInfoSchema);
 
-
 const sendVerificationEmail = async (email, code) => {
     const mailOptions = {
         from: EMAIL_USERNAME,
@@ -90,10 +79,8 @@ const sendVerificationEmail = async (email, code) => {
     await transporter.sendMail(mailOptions);
 };
 
-
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
-
 
     if (!username || !email || !password) {
         return res.status(400).json({ error: 'All fields are required.' });
@@ -119,7 +106,6 @@ app.post('/signup', async (req, res) => {
         res.status(201).json({
             message: 'User registered successfully! A verification code has been sent to your email.',
             email: newUser.email,
-            redirect: '/HTML/Byte Hub/public/verification/verification.html'
         });
 
     } catch (err) {
@@ -155,7 +141,7 @@ app.post('/verification', async (req, res) => {
         user.verificationTokenExpires = undefined;
         await user.save();
 
-        res.status(200).json({ message: 'Account verified successfully!', redirect: '../login/login.html?verified=true' });
+        res.status(200).json({ message: 'Account verified successfully!' });
     } catch (err) {
         console.error('Error during code verification:', err);
         res.status(500).json({ error: 'Error verifying code.' });
@@ -209,14 +195,13 @@ app.post('/login', async (req, res) => {
         }
 
         if (!user.isVerified) {
-            // If user is not verified, resend code and prompt them to verify
             const newVerificationCode = crypto.randomInt(100000, 999999).toString();
             user.verificationToken = newVerificationCode;
             user.verificationTokenExpires = Date.now() + 3600000;
             await user.save();
             await sendVerificationEmail(user.email, newVerificationCode);
 
-            return res.status(403).json({ error: 'Please verify your email first. A new code has been sent.', redirect: '../verification/verification.html' });
+            return res.status(403).json({ error: 'Please verify your email first. A new code has been sent.' });
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -224,7 +209,6 @@ app.post('/login', async (req, res) => {
             res.status(200).json({
                 message: 'Login successful!',
                 email: user.email,
-                redirect: '../dashboard/dashboard.html'
             });
         } else {
             res.status(401).json({ error: 'Invalid credentials.' });
