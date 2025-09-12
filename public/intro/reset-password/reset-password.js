@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
     const toast = document.getElementById('toast');
     
-    // Hardcoded URL as requested
+
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
 
     function showToast(message, type = 'error') {
@@ -79,25 +79,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-    const closedEyeIconSrc = 'https://img.icons8.com/?size=100&id=0ciqibcg6iLl&format=png&color=000000';
-    const openedEyeIconSrc = 'https://img.icons8.com/?size=100&id=4y6r43dyjbzw&format=png&color=000000';
+    const toggleNewPasswordIcon = document.getElementById('toggleNewPasswordIcon');
+    const toggleConfirmPasswordIcon = document.getElementById('toggleConfirmPasswordIcon');
+    const closedEyeIconSrc = 'https://img.icons8.com/material-outlined/24/FFFFFF/visible--v1.png';
+    const openedEyeIconSrc = 'https://img.icons8.com/material-outlined/24/FFFFFF/invisible.png';
 
-    togglePasswordButtons.forEach(togglePassword => {
-        togglePassword.addEventListener('click', () => {
-            const input = togglePassword.previousElementSibling;
-            const icon = togglePassword;
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.src = openedEyeIconSrc;
-                icon.alt = 'Hide Password';
-            } else {
-                input.type = 'password';
-                icon.src = closedEyeIconSrc;
-                icon.alt = 'Show Password';
-            }
-        });
+    toggleNewPasswordIcon.addEventListener('click', () => {
+        if (newPasswordInput.type === 'password') {
+            newPasswordInput.type = 'text';
+            confirmNewPasswordInput.type = 'text';
+            toggleNewPasswordIcon.src = openedEyeIconSrc;
+            toggleConfirmPasswordIcon.src = openedEyeIconSrc;
+        } else {
+            newPasswordInput.type = 'password';
+            confirmNewPasswordInput.type = 'password';
+            toggleNewPasswordIcon.src = closedEyeIconSrc;
+            toggleConfirmPasswordIcon.src = closedEyeIconSrc;
+        }
     });
 
     const footerParagraph = document.querySelector('footer p');

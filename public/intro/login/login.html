@@ -7,6 +7,12 @@
       rel="icon"
       href="https://img.icons8.com/?size=100&id=11240&format=png&color=22C3E6" />
     <title>Log In - Byte Hub</title>
+    <!-- Google Fonts links for Montserrat and Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="login-style.css" />
     <script src="../config.js"></script>
     <script src="./login-script.js" defer></script>
@@ -26,35 +32,38 @@
         </ul>
       </nav>
     </header>
-    <main class="login-container">
-      <h2>Log In</h2>
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="us" name="username" required />
-        </div>
+    <div id="toast" class="toast"></div>
+    <main class="login-main-container">
+      <div class="login-container">
+        <h2>Log In</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="us">Username</label>
+            <input type="text" id="us" name="username" required />
+          </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required />
-        </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
 
-        <div class="form-group">
-          <button type="submit" class="login-button" id="loginButton">
-            Log In
-          </button>
-        </div>
+          <div class="form-group">
+            <button type="submit" class="login-button" id="loginButton">
+              Log In
+            </button>
+          </div>
 
-        <div class="signup-link">
-          Don't have an account?
-          <a href="../signup/signup.html">Sign up</a>
-        </div>
-        <div class="forgot-password">
-          <a href="../forgot-password/forgot-password.html"
-            >Forgot Password?</a
-          >
-        </div>
-      </form>
+          <div class="signup-link">
+            Don't have an account?
+            <a href="../signup/signup.html">Sign up</a>
+          </div>
+          <div class="forgot-password">
+            <a href="../forgot-password/forgot-password.html"
+              >Forgot Password?</a
+            >
+          </div>
+        </form>
+      </div>
     </main>
     <footer>
       <p>&copy; 2025 Byte Hub. All rights reserved.</p>

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const displayNameElement = document.getElementById('displayName');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
     const helpForm = document.getElementById('helpForm');
@@ -10,21 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchUserData() {
         try {
-            const storedUsername = localStorage.getItem('username');
             const storedEmail = localStorage.getItem('email');
 
-            if (storedUsername) {
-                displayNameElement.textContent = `Hello, ${storedUsername}`;
+            if (storedEmail) {
                 emailInputHelp.value = storedEmail || '';
                 enableAllControls();
             } else {
-                console.log('No username found. User might not be logged in.');
-                displayNameElement.textContent = 'Welcome!';
+                console.log('No user email found. User might not be logged in.');
                 disableAllControls();
             }
         } catch (error) {
             console.error('Error fetching user data:', error);
-            displayNameElement.textContent = 'Welcome!';
             disableAllControls();
         }
     }
@@ -47,17 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function disableAllControls() {
         headerNavLinks.forEach(link => {
-            if (!link.getAttribute('href').includes('#courses')) {
-                link.style.pointerEvents = 'none';
-                link.style.opacity = '0.5';
-            }
+            link.style.pointerEvents = 'none';
+            link.style.opacity = '0.5';
         });
 
         sidebarLinks.forEach(link => {
-            if (!link.getAttribute('href').includes('#courses')) {
-                link.style.pointerEvents = 'none';
-                link.style.opacity = '0.5';
-            }
+            link.style.pointerEvents = 'none';
+            link.style.opacity = '0.5';
         });
 
         disableCourseButtons();
@@ -136,18 +127,15 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebar.style.transform = 'translateX(0)';
             sidebar.style.display = 'block';
             mainContent.style.marginLeft = '200px';
-            headerNavLinks.forEach(link => link.parentElement.style.display = 'none');
         } else {
             sidebar.style.transform = 'translateX(-100%)';
             sidebar.style.display = 'none';
             mainContent.style.marginLeft = '0';
-            headerNavLinks.forEach(link => link.parentElement.style.display = 'flex');
         }
         document.body.classList.remove('no-scroll');
     };
 
     window.addEventListener('resize', handleResize);
-
     handleResize();
 
     const footerParagraph = document.querySelector('footer p');

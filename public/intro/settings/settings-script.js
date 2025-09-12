@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetPasswordBtn = document.getElementById('resetPasswordBtn');
     const deleteAccountBtn = document.getElementById('deleteAccountBtn');
     const deleteConfirmationInput = document.getElementById('deleteAccountConfirmation');
-    const requiredPhrase = "delete my account";
+    const requiredPhrase = "sudo delete bytehub account";
 
     function loadUserEmail() {
         const userEmail = localStorage.getItem('email');
@@ -69,4 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadUserEmail();
+
+        const footerParagraph = document.querySelector('footer p');
+    if (footerParagraph) {
+        const currentYear = new Date().getFullYear();
+        footerParagraph.textContent = footerParagraph.textContent.replace(/20\d{2}/, currentYear);
+    }
 });

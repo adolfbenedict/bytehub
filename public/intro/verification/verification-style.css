@@ -1,8 +1,8 @@
 :root {
   --primary-color: #00d3ff;
   --text-color: #ffffff;
-  --font-family: "Arial", sans-serif;
-  --font-size: 16px;
+  --font-family-montserrat: "Montserrat", sans-serif;
+  --font-family-open-sans: "Open Sans", sans-serif;
   --line-height: 1.5;
   --background-color: #080e14;
   --form-background: #101820;
@@ -16,17 +16,20 @@
 }
 
 body {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-family: var(--font-family-open-sans);
+  font-size: clamp(14px, 1.2vw, 16px);
   line-height: var(--line-height);
+  
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
-  padding-bottom: 60px;
   box-sizing: border-box;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -37,7 +40,7 @@ header {
   background-color: var(--background-color);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 1px 20px;
   z-index: 1000;
   backdrop-filter: blur(10px);
@@ -59,7 +62,6 @@ header {
 }
 
 header nav {
-  margin-left: 1130px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -71,14 +73,10 @@ header nav ul {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 20px;
-}
-
-header nav ul li {
-  margin-right: 50px;
 }
 
 header nav ul li a {
+  margin: 0 50px;
   text-decoration: none;
   color: var(--text-color);
   font-weight: 600;
@@ -89,40 +87,108 @@ header nav ul li a:hover {
   color: var(--primary-color);
 }
 
-main.signup-container {
-  max-width: 600px;
-  margin: 120px auto;
-  padding: 30px;
-  background-color: var(--form-background);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  text-align: center;
+/* Toast styles */
+.toast {
+  visibility: hidden;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 16px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
 }
 
-main.signup-container h2 {
-  font-size: 2.5rem;
-  color: var(--text-color);
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.toast.error {
+  background-color: var(--error-color);
+}
+
+.toast.success {
+  background-color: var(--primary-color);
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake-error {
+  animation: shake 0.5s ease-in-out;
+  border-color: var(--error-color) !important;
+}
+
+/* Flexbox container for centering the form */
+.signup-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.signup-container {
+  max-width: clamp(320px, 90%, 500px);
+  padding: clamp(15px, 4vw, 40px);
+  background-color: var(--form-background);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--input-border);
+  backdrop-filter: blur(10px);
+}
+
+/* Updated H2 styling */
+.signup-container h2 {
+  font-family: var(--font-family-montserrat);
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--input-border);
+  padding-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: clamp(10px, 4vw, 20px);
+  font-size: clamp(1.1rem, 4vw, 1.8rem);
   text-align: center;
-  margin-top: 1px;
+  font-weight: lighter;
+}
+
+.signup-container p {
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: clamp(10px, 2vw, 20px);
+  text-align: center;
 }
 
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: clamp(10px, 2vw, 15px);
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .code-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: clamp(5px, 1.5vw, 10px);
+  margin-bottom: clamp(10px, 2vw, 20px);
+  flex-direction: row;
 }
 
 .code-input {
-  width: 50px;
-  height: 50px;
+  width: clamp(35px, 8vw, 45px);
+  height: clamp(35px, 8vw, 45px);
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   border: 1px solid var(--input-border);
   border-radius: 6px;
   background-color: transparent;
@@ -139,13 +205,13 @@ main.signup-container h2 {
 .signup-button {
   background-color: var(--primary-color);
   color: var(--text-color);
-  padding: 10px;
+  padding: clamp(7px, 1.5vw, 10px);
   border: none;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   cursor: pointer;
-  margin: 25px auto;
-  width: 250px;
+  margin: clamp(20px, 3vw, 25px) auto;
+  width: clamp(180px, 40vw, 250px);
   display: block;
   transition: background-color 0.3s;
 }
@@ -155,9 +221,9 @@ main.signup-container h2 {
 }
 
 .resend-link {
-  font-size: 0.8rem;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   text-align: center;
-  margin-top: 25px;
+  margin-top: clamp(20px, 3vw, 25px);
   color: var(--text-color);
 }
 
@@ -174,8 +240,8 @@ main.signup-container h2 {
 }
 
 footer {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--footer-background);
+  color: var(--footer-text-color);
   text-align: center;
   padding: 1px;
   position: fixed;
@@ -186,159 +252,6 @@ footer {
 
 footer p {
   margin-top: 10px;
-  font-size: 0.7rem;
-  color: var(--text-color);
-}
-
-@media (min-width: 1200px) {
-  header nav {
-    margin-left: 1130px;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  header nav {
-    margin-left: auto;
-    justify-content: flex-end;
-  }
-  main.signup-container {
-    max-width: 550px;
-    margin: 120px auto;
-    padding: 25px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  header {
-    justify-content: space-between;
-    padding: 10px 20px;
-  }
-  header nav {
-    margin-left: 0;
-    justify-content: flex-end;
-    width: auto;
-  }
-  header nav ul {
-    gap: 15px;
-  }
-  header nav ul li a {
-    margin-right: 0;
-    font-size: 0.9rem;
-  }
-  main.signup-container {
-    max-width: 500px;
-    margin: 100px auto;
-    padding: 25px;
-  }
-  main.signup-container h2 {
-    font-size: 2.2rem;
-  }
-  .signup-button {
-    width: 220px;
-    font-size: 0.75rem;
-    padding: 9px;
-  }
-  .resend-link {
-    font-size: 0.75rem;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-  }
-  header nav {
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 0;
-    width: auto;
-  }
-  header nav ul {
-    gap: 10px;
-  }
-  header nav ul li a {
-    margin-right: 0;
-    font-size: 0.9rem;
-    font-weight: 800;
-  }
-  main.signup-container {
-    max-width: 90%;
-    margin: 80px auto 20px auto;
-    padding: 20px;
-  }
-  main.signup-container h2 {
-    font-size: 2rem;
-  }
-  .signup-button {
-    width: 200px;
-    font-size: 0.7rem;
-    padding: 8px;
-  }
-  .resend-link {
-    font-size: 0.7rem;
-  }
-  .code-input {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 575px) {
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10px;
-  }
-  .header-logo a {
-    margin-bottom: 0;
-  }
-  header nav {
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 0;
-    width: auto;
-  }
-  header nav ul {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    width: auto;
-    text-align: right;
-  }
-  header nav ul li a {
-    margin-right: 0;
-    font-size: 0.9rem;
-    font-weight: 800;
-  }
-  main.signup-container {
-    max-width: 95%;
-    margin: 150px auto 20px auto;
-    padding: 15px;
-  }
-  main.signup-container h2 {
-    font-size: 1.8rem;
-  }
-  .signup-button {
-    width: 180px;
-    font-size: 0.65rem;
-    padding: 7px;
-    margin: 20px auto;
-  }
-  .resend-link {
-    font-size: 0.65rem;
-  }
-  footer p {
-    font-size: 0.6rem;
-  }
-  .code-input {
-    width: 35px;
-    height: 35px;
-    font-size: 1.1rem;
-  }
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
+  color: var(--footer-text-color);
 }

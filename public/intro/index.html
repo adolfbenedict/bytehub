@@ -5,60 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://img.icons8.com/?size=100&id=11240&format=png&color=22C3E6">
     <title>Byte Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./intro-style.css">
-    <script src="../config.js"></script>
+    <script src="./config.js"></script>
     <script src="./intro-script.js" defer></script>
 </head>
 <body>
     <header>
         <div class="header-logo">
-            <a href="#profile" class="logo">
+            <a href="#home" class="logo">
                 <img src="https://img.icons8.com/?size=100&id=11240&format=png&color=22C3E6" alt="logo">
             </a>
-        <div class="hamburger">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
         </div>
-        <nav class="nav-links">
+        <nav class="nav-main">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#courses">Courses</a></li>
+            </ul>
+        </nav>
+        <nav class="nav-login">
+            <ul>
                 <li>
                     <a href="./login/login.html">Login</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <section id="profile">
-        <div class="profile">
-            <img src="https://images.pexels.com/photos/6424587/pexels-photo-6424587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="ceo-image">
-            <h3>Byte Hub</h3>
-            <p>Byte Hub is a premier online learning platform dedicated to empowering 
-                students with innovative courses and personalized support. Our mission is to foster a 
-                love for learning and equip learners with the skills needed for succes
-                s in a digital world.</p>
-        </div>
-        <div class="social-media">
-            <a href="https://www.instagram.com/saddman.dc">
-                <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF" alt="Social Media Icon" title="Follow us on Instagram">
-            </a>
-            <a href="https://www.snapchat.com/add/the.saddman?share_id=1avL0V-iK1U&locale=en-US" target="_blank">
-                <img src="https://img.icons8.com/?size=100&id=23029&format=png&color=FFFFFF" alt="Social Media Icon" title="Follow us on Snapchat">
-            </a>
-            <a href="https://www.x.com/saddmandc" target="_blank">
-                <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=FFFFFF" alt="Social Media Icon" title="Follow us on X">
-            </a>
-            <a href="https://www.linkedin.com/in/saddman-dc-60004135a" target="_blank">
-                <img src="https://img.icons8.com/?size=100&id=447&format=png&color=FFFFFF" alt="Social Media Icon" title="Connect with us on LinkedIn">
-            </a>
-        </div>
-    </section>
     <section id="home">
-        <h2>
-            Welcome to <span id="dynamicText"></span><span id="cursor">|</span>
-        </h2>
+        <h2>Welcome to Byte Hub</h2>
         <p>
             Byte Hub is a pioneering online school that
             empowers learners worldwide by offering cutting-edge knowledge in
@@ -162,19 +139,9 @@
                 <h4>Data Science</h4>
                 <p>Unlock the power of data with our comprehensive data science courses.</p>
             </div>
-            <div class="course-card">
-                <img src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Business">
-                <h4>Business</h4>
-                <p>Gain essential business skills to thrive in today's competitive landscape.</p>
-            </div>
-            <div class="course-card">
-                <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Design">
-                <h4>Design</h4>
-                <p>Explore the principles of design and creativity in our engaging courses.</p>
-            </div>
         </div>
         <div class="enroll-button">
-            <button class="enroll-button" id="enrollButton" onclick="window.location.href='../signup/signup.html'">Enroll</button>
+            <a href="./signup/signup.html" class="enroll-link">Enroll</a>
         </div>
     </section>
     <footer>

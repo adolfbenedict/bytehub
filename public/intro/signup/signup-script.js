@@ -149,15 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const togglePassword = document.querySelector('.toggle-password');
-    const closedEyeIconSrc = 'https://img.icons8.com/?size=100&id=0ciqibcg6iLl&format=png&color=000000';
-    const openedEyeIconSrc = 'https://img.icons8.com/?size=100&id=4y6r43dyjbzw&format=png&color=000000';
+    const togglePassword = document.getElementById('togglePassword');
+    const closedEyeIconSrc = 'https://img.icons8.com/material-outlined/24/ffffff/visible--v1.png';
+    const openedEyeIconSrc = 'https://img.icons8.com/material-outlined/24/ffffff/invisible--v1.png';
 
     if (togglePassword) {
         togglePassword.addEventListener('click', () => {
             const primaryPasswordField = document.getElementById('password');
             const confirmPasswordField = document.getElementById('confirmPassword');
-            const icon = togglePassword.querySelector('img');
+            const icon = togglePassword;
 
             if (primaryPasswordField.type === 'password') {
                 primaryPasswordField.type = 'text';

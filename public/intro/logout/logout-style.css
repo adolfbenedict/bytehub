@@ -1,9 +1,7 @@
 :root {
   --primary-color: #00d3ff;
   --text-color: #ffffff;
-  --font-family: "Arial", sans-serif;
-  --font-size: 16px;
-  --line-height: 1.5;
+  --font-family: 'Open Sans', sans-serif;
   --background-color: #080e14;
   --form-background: #101820;
   --input-border: #222f3d;
@@ -11,20 +9,23 @@
   --button-hover: #009fcc;
   --footer-background: #080e14;
   --footer-text-color: #ffffff;
+  --error-color: #ff3939;
 }
 
 body {
   font-family: var(--font-family);
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  line-height: 1.5;
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
-  padding-bottom: 6px;
+  padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -35,7 +36,7 @@ header {
   background-color: var(--background-color);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 1px 20px;
   z-index: 1000;
   backdrop-filter: blur(10px);
@@ -51,44 +52,75 @@ header {
 }
 
 .header-logo a img {
-  width: 50px;
-  height: 50px;
+  width: clamp(40px, 8vw, 50px);
+  height: clamp(40px, 8vw, 50px);
   margin-right: 10px;
 }
 
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: clamp(10px, 3vw, 20px);
+}
+
+header nav ul li a {
+  margin: 0 50px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: var(--primary-color);
+}
+
+.logout-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
 .logout-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 100px 20px;
-  min-height: calc(100vh - 140px);
+  padding: clamp(50px, 10vw, 100px);
+  background-color: var(--form-background);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--input-border);
+  backdrop-filter: blur(10px);
 }
 
 .logout-container p {
-  font-size: 1rem;
-  color: var(--text-color);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: lighter;
+  color: var(--primary-color);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+  border-bottom: 1px solid var(--input-border);
+  padding-bottom: 10px;
+  width: 100%;
 }
 
 .logout-progress {
   background-color: #ddd;
-  width: 40%;
-  max-width: 400px;
-  height: 10px;
+  width: clamp(200px, 50vw, 400px);
+  height: clamp(8px, 2vw, 10px);
   border-radius: 5px;
-  margin-bottom: 2rem;
+  margin-bottom: clamp(1rem, 4vw, 2rem);
   overflow: hidden;
 }
 
 .logout-progress .progress-bar {
   background-color: var(--primary-color);
-  height: 10px;
+  height: 100%;
   border-radius: 5px;
   width: 0%;
   animation: fillProgressBar 3s ease-in-out forwards;
@@ -103,19 +135,24 @@ header {
   }
 }
 
+#loading-percentage {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-weight: lighter;
+}
+
 footer {
-  background-color: var(--footer-background);
-  color: var(--footer-text-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
   text-align: center;
   padding: 10px 0;
   position: fixed;
   bottom: 0;
   width: 100%;
-  margin-top: 20px;
+  z-index: 1000;
 }
 
 footer p {
   margin-top: 0;
-  font-size: 0.8rem;
-  color: var(--footer-text-color);
+  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+  color: var(--text-color);
 }

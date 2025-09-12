@@ -13,6 +13,10 @@
       rel="stylesheet" />
     <script src="../config.js"></script>
     <script src="../dashboard/dashboard-script.js" defer></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -22,9 +26,6 @@
           alt="logo" />
       </a>
       <nav class="header-nav-icons">
-        <a href="#profile" title="Profile"
-          ><span class="material-icons">account_circle</span></a
-        >
         <a href="#courses" title="Courses"
           ><span class="material-icons">book</span></a
         >
@@ -44,12 +45,6 @@
         <h1>Dashboard</h1>
       </div>
       <ul class="sidebar-menu">
-        <li>
-          <a href="#profile">
-            <span class="material-icons">account_circle</span>
-            <span>Profile</span>
-          </a>
-        </li>
         <li>
           <a href="#courses">
             <span class="material-icons">book</span>
@@ -76,17 +71,6 @@
         </li>
       </ul>
     </aside>
-    <section id="profile">
-      <div class="profile">
-        <img
-          src="https://images.pexels.com/photos/6424587/pexels-photo-6424587.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          class="ceo-image"
-          alt="User Profile Picture" />
-        <div class="greeting">
-          <span id="displayName"></span>
-        </div>
-      </div>
-    </section>
     <main class="main-content" id="mainContent">
       <section class="courses-container" id="courses">
         <div class="course-card">
@@ -207,40 +191,8 @@
             Enroll Now
           </button>
         </div>
-        <div class="course-card">
-          <img
-            src="https://images.pexels.com/photos/95916/pexels-photo-95916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt="Business" />
-          <h4>Business</h4>
-          <p>
-            Gain essential business skills to thrive in today's competitive
-            landscape.
-          </p>
-          <button
-            class="enroll-button"
-            id="enrollButton"
-            onclick="window.location.href='../courses/business/business.html'">
-            Enroll Now
-          </button>
-        </div>
-        <div class="course-card">
-          <img
-            src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt="Design" />
-          <h4>Design</h4>
-          <p>
-            Explore the principles of design and creativity in our engaging
-            courses.
-          </p>
-          <button
-            class="enroll-button"
-            id="enrollButton"
-            onclick="window.location.href='../courses/design/design.html'">
-            Enroll Now
-          </button>
-        </div>
       </section>
-
+    
       <section id="help">
         <h2>Need a hand?</h2>
         <div class="form-container">
@@ -249,12 +201,12 @@
               <label for="email">Email</label>
               <input type="email" id="email" name="email" readonly />
             </div>
-
+    
             <div class="form-group">
               <label for="textarea">Message</label>
               <textarea id="textarea" name="textarea" required></textarea>
             </div>
-
+    
             <div class="form-group">
               <button type="submit" class="help-button" id="helpButton">
                 Send
