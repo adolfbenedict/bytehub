@@ -1,7 +1,8 @@
 :root {
   --primary-color: #00d3ff;
   --text-color: #ffffff;
-  --font-family: 'Open Sans', sans-serif;
+  --font-family-body: "Open Sans", sans-serif;
+  --font-family-heading: "Montserrat", sans-serif;
   --background-color: #080e14;
   --form-background: #101820;
   --input-border: #222f3d;
@@ -13,7 +14,7 @@
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-family-body);
   line-height: 1.5;
   background-color: var(--background-color);
   color: var(--text-color);
@@ -69,6 +70,7 @@ header nav ul {
 header nav ul li a {
   margin: 0 50px;
   text-decoration: none;
+  font-family: var(--font-family-heading);
   color: var(--text-color);
   font-weight: lighter;
   transition: color 0.3s;
