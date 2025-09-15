@@ -342,10 +342,11 @@ section h2 {
   border: 1px solid var(--input-border);
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 1em;
+  font-size: 0.9em;
   transition: border-color 0.3s ease;
   background-color: transparent;
   font-family: var(--font-family-body);
+  font-weight: lighter;
 }
 
 .form-group input[type="email"]:focus,
