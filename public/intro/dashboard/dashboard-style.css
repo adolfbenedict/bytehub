@@ -191,7 +191,7 @@ header a.logo img {
   font-size: clamp(0.8rem, 1.5vw, 0.9rem);
   text-decoration: none;
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: lighter;
   display: flex;
   flex-direction: row; 
   align-items: center; 
