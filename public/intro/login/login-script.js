@@ -9,11 +9,20 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
 
-    function triggerShake(element) {
-        element.classList.add('shake-error');
-        element.addEventListener('animationend', () => {
-            element.classList.remove('shake-error');
-        }, { once: true });
+    function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast show';
+        if (type) {
+            toast.classList.add(type);
+        }
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 500);
+        }, 3000);
     }
 
     try {
@@ -36,16 +45,12 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             window.location.href = '../dashboard/dashboard.html';
         } else {
             console.error('Login failed:', data.error || 'Unknown error');
-            alert(data.error || 'Login failed. Please try again.');
-            triggerShake(usernameInput);
-            triggerShake(passwordInput);
+            showToast(data.error || 'Login failed. Please try again.', 'error');
             passwordInput.value = '';
         }
     } catch (error) {
         console.error('Error during login:', error);
-        alert('An error occurred. Please check your network connection.');
-        triggerShake(usernameInput);
-        triggerShake(passwordInput);
+        showToast('An error occurred. Please check your network connection.', 'error');
         passwordInput.value = '';
     }
 

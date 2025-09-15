@@ -8,16 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
 
-    function showToast(message, isError = false) {
+    function showToast(message, type = 'success') {
         toast.textContent = message;
         toast.className = 'toast show';
-        if (isError) {
-            toast.classList.add('error');
-        } else {
-            toast.classList.remove('error');
-        }
+        toast.classList.add(type);
         setTimeout(() => {
-            toast.className = 'toast';
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 500);
         }, 5000);
     }
 
@@ -25,24 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return str.replace(/\s/g, '');
     }
 
-    function triggerShake(element) {
-        element.classList.add('shake-error');
-        element.addEventListener('animationend', () => {
-            element.classList.remove('shake-error');
-        }, { once: true });
-    }
-
-    function logError(message) {
-        console.error('Signup Error:', message);
+    function resetErrorBorders() {
+      usernameInput.style.borderColor = '';
+      emailInput.style.borderColor = '';
+      passwordInput.style.borderColor = '';
+      confirmPasswordInput.style.borderColor = '';
     }
 
     function validateUsername() {
         const username = removeAllSpaces(usernameInput.value);
-        usernameInput.value = username; 
+        usernameInput.value = username;
         if (!username || username.length < 4) {
-            const msg = !username ? 'Username is required.' : 'Username must be at least 4 characters.';
-            showToast(msg, true);
-            triggerShake(usernameInput);
             return false;
         }
         return true;
@@ -53,9 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         emailInput.value = email;
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!email || !emailRegex.test(email)) {
-            const msg = !email ? 'Email is required.' : 'Invalid email format.';
-            showToast(msg, true);
-            triggerShake(emailInput);
             return false;
         }
         return true;
@@ -65,9 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = removeAllSpaces(passwordInput.value);
         passwordInput.value = password;
         if (!password || password.length < 6) {
-            const msg = !password ? 'Password is required.' : 'Password must be at least 6 characters.';
-            showToast(msg, true);
-            triggerShake(passwordInput);
             return false;
         }
         return true;
@@ -78,11 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmPasswordInput.value = confirmPassword;
         const password = removeAllSpaces(passwordInput.value);
         if (!confirmPassword || confirmPassword !== password) {
-            const msg = !confirmPassword ? 'Confirm password is required.' : 'Passwords do not match.';
-            showToast(msg, true);
-            triggerShake(confirmPasswordInput);
-            triggerShake(passwordInput);
+            passwordInput.style.borderColor = 'var(--error-color)';
+            confirmPasswordInput.style.borderColor = 'var(--error-color)';
             return false;
+        } else {
+            passwordInput.style.borderColor = '';
+            confirmPasswordInput.style.borderColor = '';
         }
         return true;
     }
@@ -94,20 +81,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     signupForm.addEventListener('submit', async (event) => {
         event.preventDefault();
+        resetErrorBorders();
 
         const isUsernameValid = validateUsername();
         const isEmailValid = validateEmail();
         const isPasswordValid = validatePassword();
         const isConfirmPasswordValid = validateConfirmPassword();
 
-        if (!isUsernameValid || !isEmailValid || !isPasswordValid || !isConfirmPasswordValid) {
-             return;
+        if (!isUsernameValid) {
+            showToast('Username must be at least 4 characters.', 'error');
+            return;
+        }
+        if (!isEmailValid) {
+            showToast('Invalid email format.', 'error');
+            return;
+        }
+        if (!isPasswordValid) {
+            showToast('Password must be at least 6 characters.', 'error');
+            return;
+        }
+        if (!isConfirmPasswordValid) {
+            showToast('Passwords do not match.', 'error');
+            return;
         }
 
         const username = usernameInput.value;
         const email = emailInput.value;
         const password = passwordInput.value;
-
         const data = { username, email, password };
 
         try {
@@ -118,32 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(data),
             });
-
             const responseData = await response.json();
             
             if (response.ok) {
                 showToast(responseData.message);
                 localStorage.setItem('userEmail', email);
-                console.log('Stored in localStorage:', { email: email });
-                
                 window.location.href = '../verification/verification.html'; 
             } else {
-                showToast(responseData.error, true);
-                logError('Signup failed: ' + responseData.error);
-                triggerShake(usernameInput);
-                triggerShake(emailInput);
-                triggerShake(passwordInput);
-                triggerShake(confirmPasswordInput);
+                showToast(responseData.error, 'error');
                 passwordInput.value = '';
                 confirmPasswordInput.value = '';
             }
         } catch (error) {
-            console.error('Error during signup:', error);
-            showToast('An error occurred during signup. Please check your network connection.', true);
-            triggerShake(usernameInput);
-            triggerShake(emailInput);
-            triggerShake(passwordInput);
-            triggerShake(confirmPasswordInput);
+            showToast('An error occurred during signup. Please check your network connection.', 'error');
             passwordInput.value = '';
             confirmPasswordInput.value = '';
         }

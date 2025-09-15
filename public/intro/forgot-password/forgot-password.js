@@ -1,59 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     const forgotPasswordForm = document.getElementById('forgotPasswordForm');
     const emailInput = document.getElementById('email');
-    const toastContainer = document.querySelector('.toast-container');
-    const successToast = document.querySelector('.success-toast');
-    const errorToast = document.querySelector('.error-toast');
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('error-message');
-    const crossIcons = document.querySelectorAll('.cross-icon');
+    const toast = document.getElementById('toast');
 
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
-    let timeoutId = null;
 
-    function showToast(message, type = 'error') {
-        clearTimeout(timeoutId);
-
-        if (type === 'success') {
-            successMessage.textContent = message;
-            successToast.style.display = 'flex';
-            errorToast.style.display = 'none';
-        } else {
-            errorMessage.textContent = message;
-            errorToast.style.display = 'flex';
-            successToast.style.display = 'none';
+    function showToast(message, type) {
+        toast.textContent = message;
+        toast.className = 'toast show';
+        if (type) {
+            toast.classList.add(type);
         }
 
-        toastContainer.style.display = 'flex';
         setTimeout(() => {
-            if (type === 'success') {
-                successToast.classList.add('show');
-            } else {
-                errorToast.classList.add('show');
-            }
-        }, 10);
-
-        timeoutId = setTimeout(hideToast, 5000);
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.className = 'toast';
+            }, 500);
+        }, 5000);
     }
-
-    function hideToast() {
-        if (successToast.classList.contains('show')) {
-            successToast.classList.remove('show');
-        }
-        if (errorToast.classList.contains('show')) {
-            errorToast.classList.remove('show');
-        }
-        setTimeout(() => {
-            toastContainer.style.display = 'none';
-        }, 500);
-    }
-
-    crossIcons.forEach(icon => {
-        icon.addEventListener('click', () => {
-            clearTimeout(timeoutId);
-            hideToast();
-        });
-    });
 
     function removeAllSpaces(str) {
         return str.replace(/\s/g, '');
@@ -62,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function validateEmail() {
         const email = removeAllSpaces(emailInput.value);
         emailInput.value = email;
-
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!email) {
             showToast('Email is required', 'error');
@@ -103,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(responseData.error || 'Password reset failed. Please try again.', 'error');
             }
         } catch (error) {
-            console.error('Error during password reset request:', error);
             showToast('Network error or server unreachable. Please try again.', 'error');
         }
     });
