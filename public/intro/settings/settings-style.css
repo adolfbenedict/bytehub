@@ -149,9 +149,10 @@ header nav ul li a:hover {
   padding: 12px;
   border-radius: 6px;
   color: var(--text-color);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   flex-grow: 1;
   min-width: 150px;
+  font-weight: lighter;
 }
 
 .reset-password-button {
@@ -187,7 +188,13 @@ header nav ul li a:hover {
   color: var(--text-color);
   margin-top: 5px;
   margin-bottom: 10px;
-  font-size: 0.9em;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+
+.confirmation-text span {
+  color: var(--error-color);
+  font-size: 1.1rem;
 }
 
 #deleteAccountConfirmation {
@@ -204,9 +211,8 @@ header nav ul li a:hover {
 
 #deleteAccountConfirmation:focus {
   outline: none;
-  border-color: var(--error-color);
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8rem;
+  border-color: var(--error-color);
 }
 
 .delete-account-button {
