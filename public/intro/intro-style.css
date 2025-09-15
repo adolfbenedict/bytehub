@@ -53,12 +53,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(5px, 2vw, 10px) clamp(10px, 3vw, 20px);
+  padding: 1px 20px;
   z-index: 1000;
   backdrop-filter: blur(10px);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  height: clamp(60px, 8vw, 80px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 header .header-logo {
@@ -102,6 +100,7 @@ header nav ul {
 }
 
 header nav ul li a {
+  font-family: var(--font-family-heading);
   text-decoration: none;
   color: var(--text-color);
   font-weight: lighter;
