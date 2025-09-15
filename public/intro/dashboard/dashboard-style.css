@@ -57,8 +57,6 @@ header {
   z-index: 1000;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  height: 60px;
 }
 
 header a.logo {
@@ -230,7 +228,7 @@ section:first-of-type {
 section h2 {
   font-family: var(--font-family-heading);
   font-size: 1.8rem;
-  font-weight: 400;
+  font-weight: lighter;
   text-align: center;
   margin-bottom: 50px;
   color: var(--primary-color);
@@ -277,7 +275,7 @@ section h2 {
 }
 
 .course-card h4 {
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-heading);
   font-size: clamp(0.9rem, 2vw, 1rem);
   color: var(--primary-color);
   padding: 10px;
