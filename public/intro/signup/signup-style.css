@@ -69,7 +69,7 @@ header nav ul li a {
   margin: 0 50px;
   text-decoration: none;
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: lighter;
   transition: color 0.3s;
 }
 

@@ -1,29 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
     const forgotPasswordForm = document.getElementById('forgotPasswordForm');
     const emailInput = document.getElementById('email');
-    const toast = document.getElementById('toast');
+    const toastContainer = document.querySelector('.toast-container');
+    const successToast = document.querySelector('.success-toast');
+    const errorToast = document.querySelector('.error-toast');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const crossIcons = document.querySelectorAll('.cross-icon');
 
-    // Hardcoded URL as requested
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
+    let timeoutId = null;
 
     function showToast(message, type = 'error') {
-        toast.textContent = message;
-        toast.className = `toast ${type}`;
-        toast.classList.add('show');
+        clearTimeout(timeoutId);
+
+        if (type === 'success') {
+            successMessage.textContent = message;
+            successToast.style.display = 'flex';
+            errorToast.style.display = 'none';
+        } else {
+            errorMessage.textContent = message;
+            errorToast.style.display = 'flex';
+            successToast.style.display = 'none';
+        }
+
+        toastContainer.style.display = 'flex';
         setTimeout(() => {
-            toast.classList.remove('show');
-        }, 5000);
+            if (type === 'success') {
+                successToast.classList.add('show');
+            } else {
+                errorToast.classList.add('show');
+            }
+        }, 10);
+
+        timeoutId = setTimeout(hideToast, 5000);
     }
+
+    function hideToast() {
+        if (successToast.classList.contains('show')) {
+            successToast.classList.remove('show');
+        }
+        if (errorToast.classList.contains('show')) {
+            errorToast.classList.remove('show');
+        }
+        setTimeout(() => {
+            toastContainer.style.display = 'none';
+        }, 500);
+    }
+
+    crossIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            clearTimeout(timeoutId);
+            hideToast();
+        });
+    });
 
     function removeAllSpaces(str) {
         return str.replace(/\s/g, '');
-    }
-
-    function triggerShake(element) {
-        element.classList.add('shake-error');
-        element.addEventListener('animationend', () => {
-            element.classList.remove('shake-error');
-        }, { once: true });
     }
 
     function validateEmail() {
@@ -33,11 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!email) {
             showToast('Email is required', 'error');
-            triggerShake(emailInput);
             return false;
         } else if (!emailRegex.test(email)) {
             showToast('Invalid email format', 'error');
-            triggerShake(emailInput);
             return false;
         }
         return true;
@@ -70,12 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 forgotPasswordForm.reset();
             } else {
                 showToast(responseData.error || 'Password reset failed. Please try again.', 'error');
-                triggerShake(emailInput);
             }
         } catch (error) {
             console.error('Error during password reset request:', error);
             showToast('Network error or server unreachable. Please try again.', 'error');
-            triggerShake(emailInput);
         }
     });
 
