@@ -14,7 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: ['https://bytehub-one.vercel.app', 'https://bytehubserver.onrender.com'], 
+    origin: 'https://bytehub-one.vercel.app', 
     methods: ['GET', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type'],
 };
