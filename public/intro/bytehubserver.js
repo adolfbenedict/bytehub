@@ -128,7 +128,7 @@ app.post('/signup', async (req, res) => {
         await sendVerificationEmail(newUser.email, verificationCode);
 
         res.status(201).json({
-            message: 'User registered successfully! A verification code has been sent to your email.',
+            message: 'Registration successful! A verification code has been sentto your mail.',
             email: newUser.email,
         });
 
@@ -196,7 +196,7 @@ app.post('/resend-code', async (req, res) => {
 
         await sendVerificationEmail(user.email, newVerificationCode);
 
-        res.status(200).json({ message: 'A new verification code has been sent to your email.' });
+        res.status(200).json({ message: 'A new verification code has been sent to your mail.' });
     } catch (err) {
         console.error('Error in resend-code:', err);
         res.status(500).json({ error: 'Error processing request.' });
@@ -250,7 +250,7 @@ app.post('/forgot-password', async (req, res) => {
         const user = await UserInfo.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: 'If a user with that email exists, a password reset link has been sent.' });
+            return res.status(400).json({ message: 'A password reset link has been sent to the email.' });
         }
 
         const resetPasswordToken = crypto.randomBytes(20).toString('hex');
@@ -260,7 +260,7 @@ app.post('/forgot-password', async (req, res) => {
 
         await sendPasswordResetEmail(user.email, resetPasswordToken);
 
-        res.status(200).json({ message: 'If a user with that email exists, a password reset link has been sent.' });
+        res.status(200).json({ message: 'A password reset link has been sent to the email.' });
     } catch (error) {
         console.error('Error in /forgot-password:', error);
         res.status(500).json({ error: 'Error sending password reset email.' });
@@ -286,7 +286,7 @@ app.post('/reset-password', async (req, res) => {
         user.resetPasswordExpires = undefined;
         await user.save();
 
-        res.status(200).json({ message: 'Password has been reset successfully.' });
+        res.status(200).json({ message: 'Password reset successful.' });
     } catch (error) {
         console.error('Error in /reset-password:', error);
         res.status(500).json({ error: 'Error resetting password.' });
