@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const userEmail = localStorage.getItem('email');
             if (!userEmail) {
-                // Clear any lingering cache or state and redirect
                 localStorage.clear();
                 window.location.replace('../index.html');
                 return;
