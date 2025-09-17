@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const forgotPasswordForm = document.getElementById('forgotPasswordForm');
     const emailInput = document.getElementById('email');
     const toast = document.getElementById('toast');
+    const forgotPasswordButton = forgotPasswordForm.querySelector('button[type="submit"]');
 
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
 
@@ -43,9 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     forgotPasswordForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        const originalButtonText = forgotPasswordButton.innerHTML;
+        const originalButtonOpacity = forgotPasswordButton.style.opacity;
+
         if (!validateEmail()) {
             return;
         }
+        
+        forgotPasswordButton.innerHTML = 'Sending...';
+        forgotPasswordButton.disabled = true;
+        forgotPasswordButton.style.opacity = '0.7';
 
         const email = emailInput.value;
 
@@ -68,6 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             showToast('Network error or server unreachable. Please try again.', 'error');
+        } finally {
+            forgotPasswordButton.innerHTML = originalButtonText;
+            forgotPasswordButton.disabled = false;
+            forgotPasswordButton.style.opacity = originalButtonOpacity;
         }
     });
 

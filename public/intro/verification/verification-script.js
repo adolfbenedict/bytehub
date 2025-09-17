@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const codeInputs = document.querySelectorAll('.code-input');
     const verifyCodeForm = document.getElementById('verifyCodeForm');
+    const verifyButton = verifyCodeForm.querySelector('button[type="submit"]');
     const toast = document.getElementById('toast');
     const resendLink = document.getElementById('resendCode');
     const email = localStorage.getItem('userEmail');
@@ -36,15 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     verifyCodeForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const originalButtonText = verifyButton.innerHTML;
+        const originalButtonOpacity = verifyButton.style.opacity;
+
+        verifyButton.innerHTML = 'Verifying...';
+        verifyButton.disabled = true;
+        verifyButton.style.opacity = '0.7';
+
         const fullCode = Array.from(codeInputs).map(input => input.value).join('');
 
         if (fullCode.length !== 6 || !/^\d+$/.test(fullCode)) {
             showToast('Please enter a valid 6-digit code.', true);
+            verifyButton.innerHTML = originalButtonText;
+            verifyButton.disabled = false;
+            verifyButton.style.opacity = originalButtonOpacity;
             return;
         }
 
         try {
-            // FIX: Removed /api/ from the URL
             const response = await fetch(`${BACKEND_URL}/verification`, {
                 method: 'POST',
                 headers: {
@@ -61,14 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 showToast(data.message);
                 localStorage.removeItem('userEmail');
-                // The frontend handles the redirect now
                 window.location.href = '../login/login.html?verified=true';
             } else {
                 showToast(data.error, true);
+                verifyButton.innerHTML = originalButtonText;
+                verifyButton.disabled = false;
+                verifyButton.style.opacity = originalButtonOpacity;
             }
         } catch (error) {
-            console.error('Error during verification:', error);
-            showToast('An error occurred. Please try again later.', true);
+                console.error('Error during verification:', error);
+                showToast('An error occurred. Please try again later.', true);
+                verifyButton.innerHTML = originalButtonText;
+                verifyButton.disabled = false;
+                verifyButton.style.opacity = originalButtonOpacity;
         }
     });
 
@@ -79,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            // FIX: Removed /api/ from the URL
             const response = await fetch(`${BACKEND_URL}/resend-code`, {
                 method: 'POST',
                 headers: {

@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const resetPasswordForm = document.getElementById('resetPasswordForm');
+    const resetPasswordButton = resetPasswordForm.querySelector('button[type="submit"]');
     const newPasswordInput = document.getElementById('newPassword');
     const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
     const toast = document.getElementById('toast');
     
-
     const BACKEND_URL = 'https://bytehubserver.onrender.com';
 
     function showToast(message, type = 'error') {
@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPasswordForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        const originalButtonText = resetPasswordButton.innerHTML;
+        const originalButtonOpacity = resetPasswordButton.style.opacity;
+
         const token = new URLSearchParams(window.location.search).get('token');
         if (!token) {
             showToast('Invalid or missing token.', 'error');
@@ -51,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
             triggerShake(confirmNewPasswordInput);
             return;
         }
+
+        resetPasswordButton.innerHTML = 'Resetting...';
+        resetPasswordButton.disabled = true;
+        resetPasswordButton.style.opacity = '0.7';
 
         try {
             const response = await fetch(`${BACKEND_URL}/reset-password`, {
@@ -76,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
             showToast('An error occurred. Please try again later.', 'error');
+        } finally {
+            resetPasswordButton.innerHTML = originalButtonText;
+            resetPasswordButton.disabled = false;
+            resetPasswordButton.style.opacity = originalButtonOpacity;
         }
     });
 
