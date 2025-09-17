@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteConfirmationInput = document.getElementById('deleteAccountConfirmation');
     const requiredPhrase = "sudo delete bytehub account";
 
+    const BACKEND_URL = 'https://bytehubserver.onrender.com';
+
     function loadUserEmail() {
         const userEmail = localStorage.getItem('email');
         if (userEmail) {
@@ -33,20 +35,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetPasswordBtn.addEventListener('click', () => {
         if (!resetPasswordBtn.disabled) {
-            window.location.href = '../forgot-password/forgot-password.html';
+            const originalButtonText = resetPasswordBtn.innerHTML;
+            resetPasswordBtn.innerHTML = 'Sending...';
+            resetPasswordBtn.disabled = true;
+            resetPasswordBtn.style.opacity = '0.7';
+
+            const userEmail = localStorage.getItem('email');
+            
+            fetch(`${BACKEND_URL}/forgot-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: userEmail }),
+            }).finally(() => {
+                resetPasswordBtn.innerHTML = originalButtonText;
+                resetPasswordBtn.disabled = false;
+                resetPasswordBtn.style.opacity = '';
+                window.location.href = '../forgot-password/forgot-password.html';
+            });
         }
     });
 
     deleteAccountBtn.addEventListener('click', async () => {
         if (!deleteAccountBtn.disabled) {
+            const originalButtonText = deleteAccountBtn.innerHTML;
+            deleteAccountBtn.innerHTML = 'Deleting...';
+            deleteAccountBtn.disabled = true;
+            deleteAccountBtn.style.opacity = '0.7';
+
             const userEmail = localStorage.getItem('email');
             if (!userEmail) {
+                window.history.replaceState(null, null, '../index.html');
                 window.location.href = '../index.html';
                 return;
             }
 
             try {
-                const response = await fetch('https://bytehubserver.onrender.com/delete-account', {
+                const response = await fetch(`${BACKEND_URL}/delete-account`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,10 +85,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.history.replaceState(null, null, '../index.html');
                     window.location.href = '../index.html';
                 } else {
+                    deleteAccountBtn.innerHTML = originalButtonText;
+                    deleteAccountBtn.disabled = false;
+                    deleteAccountBtn.style.opacity = '';
+                    window.history.replaceState(null, null, '../index.html');
                     window.location.href = '../index.html';
                 }
             } catch (error) {
                 console.error('Error deleting account:', error);
+                deleteAccountBtn.innerHTML = originalButtonText;
+                deleteAccountBtn.disabled = false;
+                deleteAccountBtn.style.opacity = '';
+                window.history.replaceState(null, null, '../index.html');
                 window.location.href = '../index.html';
             }
         }
@@ -70,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadUserEmail();
 
-        const footerParagraph = document.querySelector('footer p');
+    const footerParagraph = document.querySelector('footer p');
     if (footerParagraph) {
         const currentYear = new Date().getFullYear();
         footerParagraph.textContent = footerParagraph.textContent.replace(/20\d{2}/, currentYear);
