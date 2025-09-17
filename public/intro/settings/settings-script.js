@@ -66,8 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const userEmail = localStorage.getItem('email');
             if (!userEmail) {
-                window.history.replaceState(null, null, '../index.html');
-                window.location.href = '../index.html';
+                // Clear any lingering cache or state and redirect
+                localStorage.clear();
+                window.location.replace('../index.html');
                 return;
             }
 
@@ -82,22 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     localStorage.clear();
-                    window.history.replaceState(null, null, '../index.html');
-                    window.location.href = '../index.html';
+                    window.location.replace('../index.html');
                 } else {
                     deleteAccountBtn.innerHTML = originalButtonText;
                     deleteAccountBtn.disabled = false;
                     deleteAccountBtn.style.opacity = '';
-                    window.history.replaceState(null, null, '../index.html');
-                    window.location.href = '../index.html';
+                    window.location.replace('../index.html');
                 }
             } catch (error) {
                 console.error('Error deleting account:', error);
                 deleteAccountBtn.innerHTML = originalButtonText;
                 deleteAccountBtn.disabled = false;
                 deleteAccountBtn.style.opacity = '';
-                window.history.replaceState(null, null, '../index.html');
-                window.location.href = '../index.html';
+                window.location.replace('../index.html');
             }
         }
     });
