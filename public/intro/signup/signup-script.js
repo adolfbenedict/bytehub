@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
+    const signupButton = document.getElementById('signupButton');
+    const originalButtonText = signupButton.innerHTML;
+    const originalButtonOpacity = signupButton.style.opacity;
+
     const usernameInput = document.getElementById('username');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -105,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        signupButton.innerHTML = 'Enrolling...';
+        signupButton.disabled = true;
+        signupButton.style.opacity = '0.7';
+
         const username = usernameInput.value;
         const email = emailInput.value;
         const password = passwordInput.value;
@@ -128,11 +136,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast(responseData.error, 'error');
                 passwordInput.value = '';
                 confirmPasswordInput.value = '';
+                signupButton.innerHTML = originalButtonText;
+                signupButton.disabled = false;
+                signupButton.style.opacity = originalButtonOpacity;
             }
         } catch (error) {
             showToast('An error occurred during signup. Please check your network connection.', 'error');
             passwordInput.value = '';
             confirmPasswordInput.value = '';
+            signupButton.innerHTML = originalButtonText;
+            signupButton.disabled = false;
+            signupButton.style.opacity = originalButtonOpacity;
         }
     });
 

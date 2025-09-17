@@ -1,6 +1,14 @@
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
+    const loginButton = document.getElementById('loginButton');
+    const originalButtonText = loginButton.innerHTML;
+    const originalButtonOpacity = loginButton.style.opacity;
+
+    loginButton.innerHTML = 'Logging in...';
+    loginButton.disabled = true;
+    loginButton.style.opacity = '0.7';
+
     const usernameInput = document.getElementById('us');
     const passwordInput = document.getElementById('password');
 
@@ -47,11 +55,17 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             console.error('Login failed:', data.error || 'Unknown error');
             showToast(data.error || 'Login failed. Please try again.', 'error');
             passwordInput.value = '';
+            loginButton.innerHTML = originalButtonText;
+            loginButton.disabled = false;
+            loginButton.style.opacity = originalButtonOpacity;
         }
     } catch (error) {
         console.error('Error during login:', error);
         showToast('An error occurred. Please check your network connection.', 'error');
         passwordInput.value = '';
+        loginButton.innerHTML = originalButtonText;
+        loginButton.disabled = false;
+        loginButton.style.opacity = originalButtonOpacity;
     }
 
     const footerParagraph = document.querySelector('footer p');
