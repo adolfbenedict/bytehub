@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            const storedEmail = localStorage.getItem('email');
+            if (!storedEmail) {
+                window.location.reload();
+            }
+        }
+    });
+    
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
     const helpForm = document.getElementById('helpForm');
