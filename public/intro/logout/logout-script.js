@@ -1,20 +1,17 @@
 let progress = 0;
 const progressBar = document.querySelector(".progress-bar");
 const loadingPercentage = document.getElementById("loading-percentage");
+
 const logoutAndRedirect = async () => {
   try {
-    const response = await fetch("https://bytehubonline.vercel.app/logout", {
+    await fetch("https://bytehubonline.vercel.app/logout", {
       method: "POST",
     });
-    if (response.ok) {
-      console.log("Logged out successfully from the server.");
-    } else {
-      console.error("Server-side logout failed.");
-    }
   } catch (error) {
     console.error("Error during server-side logout:", error);
   } finally {
     localStorage.clear();
+
     const interval = setInterval(() => {
       progress += 1;
       progressBar.style.width = `${progress}%`;
@@ -22,12 +19,19 @@ const logoutAndRedirect = async () => {
       if (progress >= 100) {
         clearInterval(interval);
         setTimeout(() => {
-          window.location.href = "../index";
+          // This is the key change to force a full refresh on redirect
+          window.location.replace("../index"); 
         }, 900);
       }
     }, 20);
   }
 };
+
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.go(1);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   if ("caches" in window) {
     caches.keys().then(function (cacheNames) {
