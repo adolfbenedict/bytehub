@@ -19,8 +19,7 @@ const logoutAndRedirect = async () => {
       if (progress >= 100) {
         clearInterval(interval);
         setTimeout(() => {
-          // This is the key change to force a full refresh on redirect
-          window.location.replace("../index"); 
+          window.location.replace("../index?reload=true");
         }, 900);
       }
     }, 20);

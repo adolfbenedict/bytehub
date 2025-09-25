@@ -1,3 +1,7 @@
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('reload') === 'true') {
+    window.location.replace(window.location.pathname);
+}
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
