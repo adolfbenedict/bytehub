@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      const userEmail = localStorage.getItem('email');
+      if (!userEmail) {
+        window.location.reload();
+      }
+    }
+  });
+
   const userEmailSpan = document.getElementById("userEmail");
   const resetPasswordBtn = document.getElementById("resetPasswordBtn");
   const deleteAccountBtn = document.getElementById("deleteAccountBtn");
