@@ -41,11 +41,14 @@ if (
 }
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: 'smtp.mail.me.com',
+  port: 587,
+  secure: false,
   auth: {
     user: EMAIL_USERNAME,
     pass: EMAIL_PASSWORD,
   },
+  connectionTimeout: 10000 
 });
 
 mongoose
