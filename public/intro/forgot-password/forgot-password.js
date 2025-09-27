@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        forgotPasswordButton.innerHTML = 'Sending...';
+        forgotPasswordButton.innerHTML = 'Sending';
         forgotPasswordButton.disabled = true;
         forgotPasswordButton.style.opacity = '0.7';
 

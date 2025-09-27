@@ -20,7 +20,7 @@ export async function fetchWithAuth(url, options = {}) {
     });
 
     if (response.status === 403 || response.status === 401) {
-        console.log("Access Token expired. Attempting refresh...");
+        console.log("Access Token expired. Attempting refresh");
         
         const refreshResponse = await fetch(`${BACKEND_URL}/token`, {
             method: 'POST',
@@ -38,7 +38,7 @@ export async function fetchWithAuth(url, options = {}) {
                 'Authorization': `Bearer ${newAccessToken}`,
             };
 
-            console.log("Token refreshed. Retrying original request...");
+            console.log("Token refreshed. Retrying original request");
             
             response = await fetch(`${BACKEND_URL}${url}`, {
                 ...options,

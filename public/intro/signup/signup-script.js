@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    signupButton.innerHTML = "Enrolling...";
+    signupButton.innerHTML = "Enrolling";
     signupButton.disabled = true;
     signupButton.style.opacity = "0.7";
 

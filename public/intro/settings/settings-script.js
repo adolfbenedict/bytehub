@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resetPasswordBtn.addEventListener("click", () => {
     if (!resetPasswordBtn.disabled) {
       const originalButtonText = resetPasswordBtn.innerHTML;
-      resetPasswordBtn.innerHTML = "Sending...";
+      resetPasswordBtn.innerHTML = "Sending";
       resetPasswordBtn.disabled = true;
       resetPasswordBtn.style.opacity = "0.7";
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   deleteAccountBtn.addEventListener("click", async () => {
     if (!deleteAccountBtn.disabled) {
       const originalButtonText = deleteAccountBtn.innerHTML;
-      deleteAccountBtn.innerHTML = "Deleting...";
+      deleteAccountBtn.innerHTML = "Deleting";
       deleteAccountBtn.disabled = true;
       deleteAccountBtn.style.opacity = "0.7";
 

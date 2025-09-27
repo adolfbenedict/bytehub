@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalButtonText = verifyButton.innerHTML;
     const originalButtonOpacity = verifyButton.style.opacity;
 
-    verifyButton.innerHTML = "Verifying...";
+    verifyButton.innerHTML = "Verifying";
     verifyButton.disabled = true;
     verifyButton.style.opacity = "0.7";
 

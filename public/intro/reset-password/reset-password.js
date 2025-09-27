@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    resetPasswordButton.innerHTML = "Resetting...";
+    resetPasswordButton.innerHTML = "Resetting";
     resetPasswordButton.disabled = true;
     resetPasswordButton.style.opacity = "0.7";
 

@@ -7,7 +7,7 @@ document
     const originalButtonText = loginButton.innerHTML;
     const originalButtonOpacity = loginButton.style.opacity;
 
-    loginButton.innerHTML = "Logging in...";
+    loginButton.innerHTML = "Logging in";
     loginButton.disabled = true;
     loginButton.style.opacity = "0.7";
 
