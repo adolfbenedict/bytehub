@@ -51,10 +51,12 @@ if (
 }
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp-relay.brevo.com', 
+  port: 587,                   
+  secure: false,               
   auth: {
-    user: EMAIL_USERNAME,
-    pass: EMAIL_PASSWORD,
+    user: EMAIL_USERNAME,      
+    pass: EMAIL_PASSWORD,      
   },
 });
 
@@ -166,7 +168,7 @@ const checkLockout = (user) => {
 // EMAIL FUNCTIONS
 const sendVerificationEmail = async (email, code) => {
   const mailOptions = {
-    from: EMAIL_USERNAME,
+    from: EMAIL_USERNAME, 
     to: email,
     subject: "Byte Hub - Your Verification Code",
     html: `
@@ -200,6 +202,7 @@ const sendPasswordResetEmail = async (email, token) => {
                     <p style="color: #666;">Please click on the following button to reset your password:</p>
                     <a href="${resetUrl}" style="background-color: #00d3ff; color: #fff; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin: 20px 0;">Reset Password</a>
                     <p style="color: #666;">If you did not request this, please ignore this email and your password will remain unchanged.</p>
+                    <p style="color: #666;">This link is valid for 1 hour.</p>
                     <p style="color: #666; font-size: 12px; margin-top: 30px;">&copy; 2025 Byte Hub. All rights reserved.</p>
                 </div>
             </div>
@@ -490,9 +493,10 @@ app.post("/contact", [body('email').isEmail().withMessage('Must be a valid email
   const { email, message } = req.body;
 
   const mailOptions = {
-    from: email,
-    to: EMAIL_USERNAME,
-    subject: "New Contact Form Submission from Byte Hub",
+    from: EMAIL_USERNAME, 
+    to: EMAIL_USERNAME,   
+    replyTo: email,       
+    subject: `New Contact Form Submission from Byte Hub - From: ${email}`,
     html: `
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Message:</strong> ${message}</p>
