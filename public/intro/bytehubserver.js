@@ -54,7 +54,7 @@ const transporter = nodemailer.createTransport({
     user: EMAIL_USERNAME,
     pass: EMAIL_PASSWORD,
   },
-  connectionTimeout: 10000 
+  connectionTimeout: 50000 
 });
 
 mongoose
