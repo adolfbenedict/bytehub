@@ -41,9 +41,7 @@ if (
 }
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.mail.me.com',
-  port: 587,
-  secure: false,
+  service: "gmail",
   auth: {
     user: EMAIL_USERNAME,
     pass: EMAIL_PASSWORD,
