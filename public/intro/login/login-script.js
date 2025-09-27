@@ -21,6 +21,7 @@ document
 
     function showToast(message, type) {
       const toast = document.getElementById("toast");
+      if (!toast) return; 
       toast.textContent = message;
       toast.className = "toast show";
       if (type) {
@@ -41,33 +42,38 @@ document
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", 
         body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        if (data.accessToken) {
+            localStorage.setItem("accessToken", data.accessToken);
+        }
+        
         localStorage.setItem("username", username);
         if (data.email) {
           localStorage.setItem("email", data.email);
         }
-        console.log("Login successful. Redirecting...");
+        showToast("Login successful!", "success");
         window.location.href = "../dashboard/dashboard";
       } else {
-        console.error("Login failed:", data.error || "Unknown error");
-        showToast(data.error || "Login failed. Please try again.", "error");
+        const errorMessage = data.error || data.message || "Login failed. Please try again.";
+        console.error("Login failed:", errorMessage);
+        showToast(errorMessage, "error");
+        
         passwordInput.value = "";
-        loginButton.innerHTML = originalButtonText;
-        loginButton.disabled = false;
-        loginButton.style.opacity = originalButtonOpacity;
       }
     } catch (error) {
       console.error("Error during login:", error);
       showToast(
-        "An error occurred. Please check your network connection.",
+        "A network error occurred. Please check your connection.",
         "error"
       );
       passwordInput.value = "";
+    } finally {
       loginButton.innerHTML = originalButtonText;
       loginButton.disabled = false;
       loginButton.style.opacity = originalButtonOpacity;

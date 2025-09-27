@@ -1,3 +1,5 @@
+import { fetchWithAuth } from '../utils/api_wrapper.js'; 
+
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
@@ -83,12 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch(`${BACKEND_URL}/delete-account`, {
+        const response = await fetchWithAuth("/delete-account", {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: userEmail }),
+          }
         });
 
         if (response.ok) {

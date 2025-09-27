@@ -1,3 +1,5 @@
+import { fetchWithAuth } from '../utils/api_wrapper.js'; 
+
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('pageshow', (event) => {
         if (event.persisted) {

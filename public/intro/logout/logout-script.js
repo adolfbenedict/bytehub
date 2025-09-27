@@ -3,13 +3,19 @@ const progressBar = document.querySelector(".progress-bar");
 const loadingPercentage = document.getElementById("loading-percentage");
 
 const logoutAndRedirect = async () => {
+  const BACKEND_URL = "https://bytehubserver.onrender.com";
+
   try {
-    await fetch("https://bytehubonline.vercel.app/logout", {
+    await fetch(`${BACKEND_URL}/logout`, {
       method: "POST",
+      credentials: "include", 
     });
   } catch (error) {
     console.error("Error during server-side logout:", error);
   } finally {
+    localStorage.removeItem("accessToken"); 
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
     localStorage.clear();
 
     const interval = setInterval(() => {
