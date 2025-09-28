@@ -1,10 +1,12 @@
 import { fetchWithAuth } from '../utils/api_wrapper.js'; 
+const BACKEND_URL = "https://bytehubserver.onrender.com";
+
+let accessToken = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('pageshow', (event) => {
         if (event.persisted) {
-            const storedEmail = localStorage.getItem('email');
-            if (!storedEmail) {
+            if (!accessToken) {
                 window.location.reload();
             }
         }
@@ -18,20 +20,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerNavLinks = document.querySelectorAll('.header-nav-icons a');
     const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
 
-    async function fetchUserData() {
+    async function fetchAccessToken() {
         try {
-            const storedEmail = localStorage.getItem('email');
+            const response = await fetch(`${BACKEND_URL}/token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-            if (storedEmail) {
-                emailInputHelp.value = storedEmail || '';
-                enableAllControls();
-            } else {
-                console.log('No user email found. User might not be logged in.');
-                disableAllControls();
+            if (!response.ok) {
+                throw new Error('Failed to refresh access token.');
             }
+
+            const data = await response.json();
+            accessToken = data.accessToken;
+            return true;
         } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.error('Session validation failed:', error);
+            return false;
+        }
+    }
+
+    async function fetchAndValidateSession() {
+        const sessionValid = await fetchAccessToken();
+
+        if (sessionValid) {
+            try {
+                const userDataResponse = await fetchWithAuth(`${BACKEND_URL}/protected-data`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    },
+                });
+
+                const userData = await userDataResponse.json();
+
+                if (userDataResponse.ok) {
+                    emailInputHelp.value = userData.user.email || '';
+                    enableAllControls();
+                } else {
+                    console.error('Failed to fetch protected data:', userData.error);
+                    disableAllControls();
+                    window.location.href = '../login/login';
+                }
+            } catch (error) {
+                console.error('Error fetching protected data:', error);
+                disableAllControls();
+                window.location.href = '../login/login';
+            }
+        } else {
             disableAllControls();
+            window.location.href = '../login/login';
         }
     }
 
@@ -63,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         disableCourseButtons();
-        document.getElementById('help').style.display = 'none';
+        const helpElement = document.getElementById('help');
+        if (helpElement) {
+            helpElement.style.display = 'none';
+        }
     }
 
     function enableAllControls() {
@@ -78,10 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         enableCourseButtons();
-        document.getElementById('help').style.display = 'block';
+        const helpElement = document.getElementById('help');
+        if (helpElement) {
+            helpElement.style.display = 'block';
+        }
     }
 
-    fetchUserData();
+    fetchAndValidateSession();
 
     document.querySelectorAll('.header-nav-icons a, .sidebar-menu a').forEach(link => {
         link.addEventListener('click', function(event) {
@@ -109,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch('https://bytehubserver.onrender.com/contact', {
+                const response = await fetch(`${BACKEND_URL}/contact`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

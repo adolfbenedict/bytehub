@@ -133,7 +133,7 @@ const signupValidation = [
 ];
 
 const loginValidation = [
-  body('username').trim().notEmpty().withMessage('Username is required.'),
+  body('identifier').trim().notEmpty().withMessage('Username or Email is required.'),
   body('password').notEmpty().withMessage('Password is required.'),
 ];
 
@@ -165,7 +165,6 @@ const checkLockout = (user) => {
     return null;
 };
 
-// EMAIL FUNCTIONS
 const sendVerificationEmail = async (email, code) => {
   const mailOptions = {
     from: EMAIL_USERNAME, 
@@ -211,7 +210,9 @@ const sendPasswordResetEmail = async (email, token) => {
   await transporter.sendMail(mailOptions);
 };
 
-// AUTHENTICATION ROUTES
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+
 app.post("/signup", authLimiter, signupValidation, handleValidationErrors, async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -318,10 +319,12 @@ app.post("/resend-code", authLimiter, emailValidation, handleValidationErrors, a
 });
 
 app.post("/login", authLimiter, loginValidation, handleValidationErrors, async (req, res) => {
-  const { username, password } = req.body;
+  const { identifier, password } = req.body;
 
   try {
-    const user = await UserInfo.findOne({ username });
+    const user = await UserInfo.findOne({
+        $or: [{ username: identifier }, { email: identifier }],
+    });
 
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials." });
@@ -405,16 +408,17 @@ app.post("/token", async (req, res) => {
 
         if (!user) {
             console.error("Invalid refresh token found in request.");
+            res.clearCookie('refreshToken', { httpOnly: true, secure: true, sameSite: 'None', domain: FRONTEND_DOMAIN });
             return res.status(403).json({ error: "Invalid refresh token" });
         }
 
         jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, decodedUser) => {
             if (err) {
-                user.refreshTokens = user.refreshTokens.filter(token => token !== refreshToken);
+                user.refreshTokens = [];
                 user.save();
                 res.clearCookie('refreshToken', { httpOnly: true, secure: true, sameSite: 'None', domain: FRONTEND_DOMAIN });
-                console.error("Expired refresh token removed.");
-                return res.status(403).json({ error: "Refresh token expired. Please login again." });
+                console.error("Expired/Invalid refresh token detected. All sessions revoked.");
+                return res.status(403).json({ error: "Session expired. Please login again." });
             }
 
             const newAccessToken = generateAccessToken(user);
@@ -429,17 +433,15 @@ app.post("/token", async (req, res) => {
 
 app.post("/forgot-password", authLimiter, emailValidation, handleValidationErrors, async (req, res) => {
   const { email } = req.body;
+  const genericSuccessMessage = "If a user with that email exists, a password reset link has been sent.";
 
   try {
     const user = await UserInfo.findOne({ email });
 
     if (!user) {
-      return res
-        .status(200)
-        .json({
-          message:
-            "If a user with that email exists, a password reset link has been sent.",
-        });
+      const randomDelay = Math.floor(Math.random() * 500) + 100;
+      await delay(randomDelay); 
+      return res.status(200).json({ message: genericSuccessMessage });
     }
 
     const resetPasswordToken = crypto.randomBytes(32).toString("hex");
@@ -449,12 +451,7 @@ app.post("/forgot-password", authLimiter, emailValidation, handleValidationError
 
     await sendPasswordResetEmail(user.email, resetPasswordToken);
 
-    res
-      .status(200)
-      .json({
-        message:
-          "If a user with that email exists, a password reset link has been sent.",
-      });
+    res.status(200).json({ message: genericSuccessMessage });
   } catch (error) {
     console.error("Error in /forgot-password:", error.message);
     res.status(500).json({ error: "Error sending password reset email." });

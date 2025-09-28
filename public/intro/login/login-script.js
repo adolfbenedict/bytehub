@@ -11,10 +11,10 @@ document
     loginButton.disabled = true;
     loginButton.style.opacity = "0.7";
 
-    const usernameInput = document.getElementById("us");
+    const identifierInput = document.getElementById("identifier");
     const passwordInput = document.getElementById("password");
 
-    const username = usernameInput.value;
+    const identifier = identifierInput.value;
     const password = passwordInput.value;
 
     const BACKEND_URL = "https://bytehubserver.onrender.com";
@@ -43,20 +43,12 @@ document
           "Content-Type": "application/json",
         },
         credentials: "include", 
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ identifier, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        if (data.accessToken) {
-            localStorage.setItem("accessToken", data.accessToken);
-        }
-        
-        localStorage.setItem("username", username);
-        if (data.email) {
-          localStorage.setItem("email", data.email);
-        }
         showToast("Login successful!", "success");
         window.location.href = "../dashboard/dashboard";
       } else {
