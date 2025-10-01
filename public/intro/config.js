@@ -1,1 +1,1 @@
-const BACKEND_URL = 'https://bytehub.onrender.com';
+const BACKEND_URL = 'https://bytehubserver.onrender.com';

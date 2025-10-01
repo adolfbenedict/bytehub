@@ -155,9 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const togglePassword = document.getElementById("togglePassword");
   const closedEyeIconSrc =
-    "https://img.icons8.com/material-outlined/24/ffffff/visible--v1.png";
+    "../assets/images/passwords/visible-icon-48.png";
   const openedEyeIconSrc =
-    "https://img.icons8.com/material-outlined/24/ffffff/invisible--v1.png";
+    "../assets/images/passwords/invisible-icon-48.png";
 
   if (togglePassword) {
     togglePassword.addEventListener("click", () => {

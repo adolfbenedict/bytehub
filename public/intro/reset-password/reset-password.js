@@ -103,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "toggleConfirmPasswordIcon"
   );
   const closedEyeIconSrc =
-    "https://img.icons8.com/material-outlined/24/FFFFFF/visible--v1.png";
+    "../assets/images/passwords/visible-icon-48.png";
   const openedEyeIconSrc =
-    "https://img.icons8.com/material-outlined/24/FFFFFF/invisible.png";
+    "../assets/images/passwords/invisible-icon-48.png";
 
   toggleNewPasswordIcon.addEventListener("click", () => {
     if (newPasswordInput.type === "password") {
