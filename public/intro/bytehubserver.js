@@ -51,9 +51,9 @@ if (
 }
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gamil.com',
-  port: 465,
-  secure: true,           
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,           
   auth: {
     user: EMAIL_USERNAME,      
     pass: EMAIL_PASSWORD,      
